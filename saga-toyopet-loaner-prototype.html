@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>佐賀トヨペット 代車・スマイルパスポート</title>
+<style>
+:root{--red:#00873c;--red-d:#006b2f;--err:#c8102e;--ink:#1a1a1a;--mut:#666;--bg:#f3f8f4;--card:#fff;--line:#dcdcdc;--ok:#1e7a3c;--warn:#b26a00;--okbg:#e5f4ea;--warnbg:#fff1d6;--badbg:#fde4e6;--blue:#1d4f91;--bluebg:#e4edf8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--ink:#f0f0f0;--mut:#a5a5a5;--bg:#161616;--card:#232323;--line:#3a3a3a;--okbg:#18321f;--warnbg:#3a2c0e;--badbg:#3d1519;--bluebg:#16283f;--ok:#6fd08c;--warn:#f0b24d;--blue:#8cb7ee}}
+:root[data-theme="dark"]{color-scheme:dark;--ink:#f0f0f0;--mut:#a5a5a5;--bg:#161616;--card:#232323;--line:#3a3a3a;--okbg:#18321f;--warnbg:#3a2c0e;--badbg:#3d1519;--bluebg:#16283f;--ok:#6fd08c;--warn:#f0b24d;--blue:#8cb7ee}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Noto Sans JP","Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--red);z-index:10}
+header{background:var(--red);color:#fff;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.hd{max-width:980px;margin:auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-weight:800;font-size:20px;letter-spacing:.02em;flex:1;min-width:200px}
+.logo small{display:block;font-weight:400;font-size:12px;opacity:.9}
+.seg{display:inline-flex;background:rgba(0,0,0,.25);border-radius:8px;padding:3px}
+.seg button{border:0;background:none;color:#fff;padding:6px 12px;border-radius:6px;font:inherit;font-size:14px;cursor:pointer;min-height:36px}
+.seg button.on{background:#fff;color:var(--red-d);font-weight:700}
+main{max-width:980px;margin:auto;padding:20px 16px 60px}
+h1{font-size:24px;margin:0 0 4px}h2{font-size:19px;margin:24px 0 8px}
+.mut{color:var(--mut);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin:12px 0}
+.tabs{display:flex;gap:4px;border-bottom:2px solid var(--line);margin:14px 0}
+.tabs button{border:0;background:none;color:var(--mut);font:inherit;font-weight:600;padding:10px 16px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
+.tabs button.on{color:var(--red);border-color:var(--red)}
+.steps{display:flex;gap:0;margin:8px 0 16px}
+.st{flex:1;text-align:center;font-size:13px;color:var(--mut);position:relative}
+.st i{display:block;width:30px;height:30px;line-height:30px;margin:0 auto 4px;border-radius:50%;background:var(--line);color:var(--ink);font-style:normal;font-weight:700}
+.st.on i{background:var(--red);color:#fff}.st.on{color:var(--ink);font-weight:700}.st.done i{background:var(--ok);color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}.st span{display:none}}
+label.f{display:block;font-weight:600;font-size:14px}
+label.f .req{color:var(--err)}
+input[type=text],input[type=tel],input[type=email],input[type=date],select,textarea{width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;background:var(--card);color:var(--ink);min-height:44px}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:3px solid rgba(0,135,60,.35);outline-offset:1px}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:8px;margin:8px 0;cursor:pointer}
+.chk input{width:22px;height:22px;margin-top:2px;accent-color:var(--red);flex:none}
+.btn{border:0;border-radius:8px;padding:12px 22px;font:inherit;font-weight:700;cursor:pointer;min-height:46px}
+.pri{background:var(--red);color:#fff}.pri:hover{background:var(--red-d)}
+.sec{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.ok{background:var(--ok);color:#fff}.bad{background:#fff;color:var(--err);border:1px solid var(--err)}
+.row{display:flex;gap:10px;justify-content:space-between;margin-top:18px;flex-wrap:wrap}
+.badge{display:inline-block;padding:2px 10px;border-radius:99px;font-size:13px;font-weight:700}
+.s-pending{background:var(--warnbg);color:var(--warn)}.s-approved{background:var(--bluebg);color:var(--blue)}.s-allotted,.s-returned{background:var(--okbg);color:var(--ok)}.s-rejected{background:var(--badbg);color:var(--err)}
+.req{cursor:pointer}.req:hover{border-color:var(--red)}
+.top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--red);border-radius:8px;padding:10px 14px}.stat b{font-size:26px;display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.chips button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer}.chips button.on{background:var(--red);color:#fff;border-color:var(--red)}
+.kv{display:grid;grid-template-columns:140px 1fr;gap:4px 12px;font-size:15px}.kv dt{color:var(--mut)}.kv dd{margin:0;word-break:break-word}
+@media(max-width:640px){.kv{grid-template-columns:1fr}.kv dt{margin-top:6px}}
+canvas{width:100%;height:150px;border:2px dashed var(--line);border-radius:8px;background:#fff;touch-action:none;display:block}
+.tl{display:flex;gap:6px;margin:10px 0;font-size:13px}.tl span{flex:1;text-align:center;padding:6px 2px;border-radius:6px;background:var(--line);color:var(--mut)}.tl span.on{background:var(--ok);color:#fff;font-weight:700}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#222;color:#fff;padding:12px 20px;border-radius:8px;z-index:20;max-width:90%}
+.hint{background:var(--okbg);color:var(--ok);padding:10px 14px;border-radius:8px;font-size:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.g3 .card{margin:0}@media(max-width:640px){.g3{grid-template-columns:1fr}}.tb{border-collapse:collapse;font-size:13px;width:100%;background:var(--card)}.tb th,.tb td{border:1px solid var(--line);padding:6px 8px;text-align:center}.tb td:first-child{text-align:left;min-width:200px}.tb th small{font-weight:400;color:var(--mut)}.pr{font-size:24px;font-weight:800}
+</style>
+</head>
+<body>
+<header><div class="hd">
+<div class="logo">佐賀トヨペット<small id="sub"></small></div>
+<div class="seg" id="roleSeg"></div>
+<div class="seg" id="langSeg"></div>
+</div></header>
+<main id="app"></main>
+<div id="toast"></div>
+<script>
+const T={ja:{sub:"代車ご利用 Web手続き",cust:"お客様",staff:"佐賀トヨペット（スタッフ）",
+new:"新規お申込み",my:"お申込み状況",dash:"受付一覧",
+s0:"ご利用内容",s1:"お客様情報",s2:"確認・同意",s3:"署名・送信",
+ttl:"代車のお申込み",lead:"紙の書類はもう不要です。画面の案内に沿って入力してください。",
+store:"ご利用店舗",reason:"ご利用の理由",r_shaken:"車検",r_insp:"定期点検",r_rep:"修理・板金",r_oth:"その他",
+carName:"お客様のお車（車種名）",plate:"登録番号",from:"貸出開始日",to:"返却予定日",
+name:"お名前",kana:"フリガナ",zip:"郵便番号",addr:"ご住所",tel:"電話番号",email:"メール（任意）",
+termsT:"貸出車両に関する留意事項",
+terms:["貸出車両は、十分な注意・責任を持って管理します。","万一の事故の際は、ご自身が加入されている自動車保険を優先して対応・お支払いします。その際の代車修理は当社へ入庫します。","貸出車両の又貸しはしません（ご自身の保険の適用外となります）。","貸出車両はすべて禁煙車です。ペットの同乗も控えます。","不具合を感じた際は、速やかに運行を中止し連絡します。","ドライブレコーダー搭載車は録音・録画が機能していることを了承します。"],
+excess:"※お客様の保険で対応できない場合は、免責金額（上限10万円）をご負担いただきます。",
+shakenT:"車検に関する確認事項",fine:"放置違反金の滞納情報について、自動車整備振興会を通じて警察に照会・確認することに同意します。",ctype:"車両の種別",kei:"軽自動車",reg:"登録自動車",two:"二輪車",
+ep1:"電子的方法による継続検査の申請を、申請代理人に委任します。",ep2:"保安基準適合証・自賠責保険証明書の記載事項を電子的方法で提供することを承諾します。",
+antT:"確認書（佐賀県暴力団排除条例）",ant:["私は、暴力団、暴力団員、暴力団関係企業・団体またはこれらの密接交際者、及び過去に違法・不当な要求行為を行った履歴のある者ではありません。","今後「反社会的勢力」との関わりが認められた場合、一切の契約の解除に応じ、貸与物品を速やかに返却し、損害賠償を請求しないことに同意します。"],
+agree:"はい",sigT:"ご署名（指またはマウスで記入）",clear:"書き直す",sigNote:"署名日：",review:"内容のご確認",
+back:"戻る",next:"次へ",submit:"この内容で申し込む",
+errReq:"未入力の項目があります。",errDate:"返却日は開始日以降にしてください。",errAgree:"すべての項目に同意してください。",errCt:"車両の種別と同意にチェックしてください。",errSig:"署名をお願いします。",
+done:"お申込みを受け付けました。店頭でお待ちしております。",
+none:"まだお申込みはありません。",id:"受付番号",period:"期間",car:"お客様のお車",
+pending:"確認待ち",approved:"承認済み",rejected:"お断り",allotted:"貸出中",returned:"返却済み",
+all:"すべて",tl:["申込","承認","貸出","返却"],
+loaner:"貸出車両",note:"スタッフからのメッセージ",bringId:"ご来店時は運転免許証をお持ちください。車両は店頭でお渡しします。",
+detail:"申込内容",agreed:"同意済み",notag:"未同意",sig:"署名",
+approve:"承認する",reject:"お断りする",noteIn:"お客様へのメッセージ（任意）",
+allot:"車両を割り当てる",pick:"車両を選択",handover:"貸出する（店頭でお渡し）",ret:"返却を受け付ける",close:"閉じる",
+fleet:"貸出可能車両",busy:"貸出中",free:"空き",
+stat:["確認待ち","承認済み","貸出中","返却済み"],
+demo:"デモ：お客様画面で申込み → スタッフ画面で承認・車両割当の流れをお試しください。",
+sec:"署名画像",ct:"車両種別",unit:"店舗"},
+en:{sub:"Loaner car online procedure",cust:"Customer",staff:"Saga Toyopet (Staff)",
+new:"New request",my:"My requests",dash:"Requests",
+s0:"Rental details",s1:"Your details",s2:"Review & agree",s3:"Sign & send",
+ttl:"Request a loaner car",lead:"No more paper forms. Just follow the steps on screen.",
+store:"Store",reason:"Reason for rental",r_shaken:"Vehicle inspection (Shaken)",r_insp:"Periodic check",r_rep:"Repair / body work",r_oth:"Other",
+carName:"Your car (model name)",plate:"Registration number",from:"Start date",to:"Return date",
+name:"Full name",kana:"Furigana (reading)",zip:"Postal code",addr:"Address",tel:"Phone",email:"Email (optional)",
+termsT:"Terms for the loaner vehicle",
+terms:["I will manage the loaner vehicle with due care and responsibility.","In an accident, my own auto insurance applies first for handling and repair costs. The loaner will be repaired at Saga Toyopet.","I will not lend the loaner to others (it is not covered by my insurance).","All loaners are non-smoking. I will not bring pets.","If I notice a problem, I will stop driving and contact the store immediately.","I understand that vehicles with a dashcam record audio and video."],
+excess:"If my insurance cannot cover it, I will bear the deductible (up to ¥100,000).",
+shakenT:"Vehicle inspection confirmation",fine:"I consent to Saga Toyopet checking unpaid parking-violation fines for my vehicle with the police via the Automobile Maintenance Promotion Association.",ctype:"Vehicle type",kei:"Kei car",reg:"Registered car",two:"Motorcycle",
+ep1:"I authorize electronic filing of the continued inspection to the filing agent.",ep2:"I consent to electronic provision of the safety-standard and compulsory insurance certificate data.",
+antT:"Confirmation (Saga Anti-Organized-Crime Ordinance)",ant:["I am not a member of, or affiliated with, an organized crime group, nor have I a history of unlawful or unreasonable demands.","If any link to anti-social forces is found, I agree to cancel all contracts, return borrowed items promptly, and make no damage claims."],
+agree:"Yes",sigT:"Signature (use finger or mouse)",clear:"Clear",sigNote:"Signed on: ",review:"Review",
+back:"Back",next:"Next",submit:"Submit request",
+errReq:"Some required fields are empty.",errDate:"Return date must be on or after the start date.",errAgree:"Please agree to all items.",errCt:"Select the vehicle type and consent.",errSig:"Please sign above.",
+done:"Request received. We look forward to seeing you in store.",
+none:"No requests yet.",id:"Request no.",period:"Period",car:"Your car",
+pending:"Pending",approved:"Approved",rejected:"Declined",allotted:"On loan",returned:"Returned",
+all:"All",tl:["Applied","Approved","On loan","Returned"],
+loaner:"Loaner vehicle",note:"Message from staff",bringId:"Please bring your driver’s license. The car is handed over in person at the store.",
+detail:"Request details",agreed:"Agreed",notag:"Not agreed",sig:"Signature",
+approve:"Approve",reject:"Decline",noteIn:"Message to customer (optional)",
+allot:"Allot a car",pick:"Select a vehicle",handover:"Hand over (in person)",ret:"Mark as returned",close:"Close",
+fleet:"Loaner fleet",busy:"On loan",free:"Available",
+stat:["Pending","Approved","On loan","Returned"],
+demo:"Demo: submit as Customer, then switch to Saga Toyopet to approve and allot a car.",
+sec:"Signature",ct:"Vehicle type",unit:"Store"}};
+const STORES=[["佐賀店","Saga"],["唐津店","Karatsu"],["武雄店","Takeo"],["伊万里店","Imari"],["鹿島店","Kashima"],["鳥栖店","Tosu"]];
+const FLEET=[["ピクシス エポック","Pixis Epoch","佐賀 580 あ 12-01"],["アクア","Aqua","佐賀 500 い 34-56"],["ヤリス","Yaris","佐賀 501 う 78-90"],["カローラ","Corolla","佐賀 300 え 11-22"],["ルーミー","Roomy","佐賀 500 お 33-44"],["アルファード","Alphard","佐賀 300 か 55-66"]];
+const REASONS=["shaken","insp","rep","oth"];
+let S={lang:"ja",role:"c",tab:"new",step:0,f:blank(),sel:null,flt:"all"};
+function blank(){return{store:0,reason:"shaken",carName:"",plate:"",from:new Date().toISOString().slice(0,10),to:"",name:"",kana:"",zip:"",addr:"",tel:"",email:"",terms:[0,0,0,0,0,0],fine:0,ctype:"",ep:[0,0],ant:[0,0],sig:""}}
+function seed(){const f=blank();f.name="佐賀 太郎";f.kana="サガ タロウ";f.zip="840-0801";f.addr="佐賀市駅前中央1-1-1";f.tel="090-1234-5678";f.carName="ハリアー";f.plate="佐賀 300 さ 12-34";f.to=new Date(Date.now()+864e5*2).toISOString().slice(0,10);f.terms=[1,1,1,1,1,1];f.fine=1;f.ctype="reg";f.ep=[1,1];f.ant=[1,1];return[{id:"R-1001",st:"pending",f,note:"",car:-1,at:Date.now()}]}
+function load(){try{return JSON.parse(localStorage.getItem("stp_req"))||seed()}catch(e){return seed()}}
+let R=load();
+function save(){try{localStorage.setItem("stp_req",JSON.stringify(R))}catch(e){}}
+const t=k=>T[S.lang][k];
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const sn=i=>STORES[i][S.lang==="ja"?0:1];
+const fn=i=>FLEET[i][S.lang==="ja"?0:1]+" ("+FLEET[i][2]+")";
+const stLabel=s=>`<span class="badge s-${s}">${t(s)}</span>`;
+function toast(m){const e=document.getElementById("toast");e.innerHTML=`<div class="toast" role="alert">${esc(m)}</div>`;setTimeout(()=>e.innerHTML="",3200)}
+function busy(i){return R.some(r=>r.car===i&&r.st==="allotted")}
+
+function render(){
+ document.documentElement.lang=S.lang;document.getElementById("sub").textContent=t("sub");
+ document.getElementById("roleSeg").innerHTML=`<button class="${S.role==="c"?"on":""}" onclick="S.role='c';S.sel=null;render()">${t("cust")}</button><button class="${S.role==="s"?"on":""}" onclick="S.role='s';S.sel=null;render()">${t("staff")}</button>`;
+ document.getElementById("langSeg").innerHTML=`<button class="${S.lang==="ja"?"on":""}" onclick="S.lang='ja';render()">日本語</button><button class="${S.lang==="en"?"on":""}" onclick="S.lang='en';render()">English</button>`;
+ document.getElementById("app").innerHTML=S.role==="c"?customer():staff();
+ if(S.role==="c"&&((S.mod==="loan"&&S.tab==="new"&&S.step===3)||(S.mod==="pass"&&S.pt==="new"&&S.ps===3)))initSig();
+}
+/* ---------- customer ---------- */
+function customer(){
+ if(S.mod==="pass")return passCust();
+ return modSw()+`<h1>${t("ttl")}</h1><div class="mut">${t("lead")}</div>
+ <div class="tabs"><button class="${S.tab==="new"?"on":""}" onclick="S.tab='new';render()">${t("new")}</button><button class="${S.tab==="my"?"on":""}" onclick="S.tab='my';render()">${t("my")} (${R.length})</button></div>`+(S.tab==="new"?wizard():myList());
+}
+function wizard(){
+ const names=["s0","s1","s2","s3"];
+ let h=`<div class="steps">${names.map((n,i)=>`<div class="st ${i===S.step?"on":i<S.step?"done":""}"><i>${i<S.step?"✓":i+1}</i><span>${t(n)}</span></div>`).join("")}</div><div class="card">`;
+ const f=S.f;
+ if(S.step===0){
+  h+=`<div class="grid">
+  <label class="f">${t("store")}<select onchange="S.f.store=+this.value">${STORES.map((s,i)=>`<option value="${i}" ${f.store===i?"selected":""}>${sn(i)}</option>`).join("")}</select></label>
+  <label class="f">${t("reason")}<select onchange="S.f.reason=this.value">${REASONS.map(r=>`<option value="${r}" ${f.reason===r?"selected":""}>${t("r_"+r)}</option>`).join("")}</select></label>
+  ${inp("carName",t("carName"),"text")}${inp("plate",t("plate"),"text","佐賀 300 あ 12-34")}
+  ${inp("from",t("from"),"date")}${inp("to",t("to"),"date")}</div>`;
+ }
+ if(S.step===1){
+  h+=`<div class="grid">${inp("name",t("name"),"text")}${inp("kana",t("kana"),"text")}${inp("zip",t("zip"),"text","840-0801")}${inp("tel",t("tel"),"tel")}</div><div style="margin-top:14px">${inp("addr",t("addr"),"text")}</div><div style="margin-top:14px">${inp("email",t("email"),"email")}</div>`;
+ }
+ if(S.step===2){
+  h+=`<h2 style="margin-top:0">${t("termsT")}</h2>`+t("terms").map((x,i)=>chk(`S.f.terms[${i}]=this.checked?1:0`,f.terms[i],`${i+1}. ${x}`)).join("")+`<div class="mut">${t("excess")}</div>`;
+  if(f.reason==="shaken"){
+   h+=`<h2>${t("shakenT")}</h2><div class="mut">${t("ctype")}</div><div class="grid" style="grid-template-columns:repeat(3,1fr)">${["kei","reg","two"].map(k=>`<label class="chk" style="margin:4px 0"><input type="radio" name="ct" ${f.ctype===k?"checked":""} onchange="S.f.ctype='${k}'">${t(k)}</label>`).join("")}</div>`+chk("S.f.fine=this.checked?1:0",f.fine,t("fine"))+chk("S.f.ep[0]=this.checked?1:0",f.ep[0],t("ep1"))+chk("S.f.ep[1]=this.checked?1:0",f.ep[1],t("ep2"));
+  }
+  h+=`<h2>${t("antT")}</h2>`+t("ant").map((x,i)=>chk(`S.f.ant[${i}]=this.checked?1:0`,f.ant[i],`${["①","②"][i]} ${x} 【${t("agree")}】`)).join("");
+ }
+ if(S.step===3){
+  h+=`<h2 style="margin-top:0">${t("review")}</h2>${summary(f)}<h2>${t("sigT")}</h2><canvas id="sig" aria-label="${t("sigT")}"></canvas>
+  <div class="row" style="margin-top:8px"><span class="mut">${t("sigNote")}${new Date().toLocaleDateString(S.lang==="ja"?"ja-JP":"en-GB")}</span><button class="btn sec" onclick="clearSig()">${t("clear")}</button></div>`;
+ }
+ h+=`<div class="row"><button class="btn sec" ${S.step===0?"disabled style='visibility:hidden'":""} onclick="S.step--;render();scrollTo(0,0)">${t("back")}</button>`+(S.step<3?`<button class="btn pri" onclick="nextStep()">${t("next")}</button>`:`<button class="btn pri" onclick="submitReq()">${t("submit")}</button>`)+`</div></div>`;
+ return h;
+}
+function inp(k,label,type,ph){return `<label class="f">${label} <span class="req">*</span><input type="${type}" value="${esc(S.f[k])}" ${ph?`placeholder="${esc(ph)}"`:""} oninput="S.f.${k}=this.value"></label>`}
+function chk(h,on,txt){return `<label class="chk"><input type="checkbox" ${on?"checked":""} onchange="${h}"><span>${txt}</span></label>`}
+function nextStep(){
+ const f=S.f;let e="";
+ if(S.step===0){if(!f.carName||!f.plate||!f.from||!f.to)e=t("errReq");else if(f.to<f.from)e=t("errDate")}
+ if(S.step===1&&(!f.name||!f.kana||!f.zip||!f.addr||!f.tel))e=t("errReq");
+ if(S.step===2){if(f.terms.includes(0)||f.ant.includes(0))e=t("errAgree");else if(f.reason==="shaken"&&(!f.ctype||!f.fine))e=t("errCt")}
+ if(e)return toast(e);S.step++;render();scrollTo(0,0);
+}
+function summary(f){return `<dl class="kv"><dt>${t("store")}</dt><dd>${sn(f.store)}</dd><dt>${t("reason")}</dt><dd>${t("r_"+f.reason)}</dd><dt>${t("car")}</dt><dd>${esc(f.carName)} / ${esc(f.plate)}</dd><dt>${t("period")}</dt><dd>${f.from} 〜 ${f.to}</dd><dt>${t("name")}</dt><dd>${esc(f.name)} (${esc(f.kana)})</dd><dt>${t("addr")}</dt><dd>〒${esc(f.zip)} ${esc(f.addr)}</dd><dt>${t("tel")}</dt><dd>${esc(f.tel)} ${esc(f.email)}</dd></dl>`}
+let drawing=false;
+function initSig(){const c=document.getElementById("sig");if(!c)return;const r=c.getBoundingClientRect();c.width=r.width*2;c.height=r.height*2;const x=c.getContext("2d");x.scale(2,2);x.lineWidth=2.2;x.lineCap="round";x.strokeStyle="#111";
+ if(SG().sig){const im=new Image();im.onload=()=>x.drawImage(im,0,0,r.width,r.height);im.src=SG().sig}
+ const p=e=>{const b=c.getBoundingClientRect();return[e.clientX-b.left,e.clientY-b.top]};
+ c.onpointerdown=e=>{drawing=true;c.setPointerCapture(e.pointerId);const[a,b]=p(e);x.beginPath();x.moveTo(a,b)};
+ c.onpointermove=e=>{if(!drawing)return;const[a,b]=p(e);x.lineTo(a,b);x.stroke()};
+ c.onpointerup=()=>{drawing=false;SG().sig=c.toDataURL()};
+}
+function clearSig(){SG().sig="";initSig();const c=document.getElementById("sig");c.getContext("2d").clearRect(0,0,c.width,c.height)}
+function submitReq(){
+ if(!S.f.sig)return toast(t("errSig"));
+ const id="R-"+(1001+R.length);R.unshift({id,st:"pending",f:S.f,note:"",car:-1,at:Date.now()});save();
+ S.f=blank();S.step=0;S.tab="my";render();toast(t("done"));scrollTo(0,0);
+}
+function timeline(st){const o={pending:0,approved:1,allotted:2,returned:3,rejected:0}[st];return `<div class="tl">${t("tl").map((x,i)=>`<span class="${i<=o&&st!=="rejected"?"on":""}">${x}</span>`).join("")}</div>`}
+function myList(){
+ if(!R.length)return `<div class="card">${t("none")}</div>`;
+ return R.map(r=>`<div class="card"><div class="top"><b>${t("id")} ${r.id}</b>${stLabel(r.st)}</div><div class="mut">${sn(r.f.store)} ・ ${r.f.from} 〜 ${r.f.to} ・ ${esc(r.f.carName)}</div>${timeline(r.st)}
+ ${r.car>=0?`<div class="hint"><b>${t("loaner")}:</b> ${fn(r.car)}</div>`:""}
+ ${r.note?`<p><b>${t("note")}:</b> ${esc(r.note)}</p>`:""}
+ ${r.st==="approved"||r.st==="allotted"?`<div class="mut">${t("bringId")}</div>`:""}</div>`).join("");
+}
+/* ---------- staff ---------- */
+function staff(){
+ if(S.mod==="pass")return staffPass();
+ if(S.sel)return detail(R.find(r=>r.id===S.sel));
+ const c=s=>R.filter(r=>r.st===s).length;
+ const list=R.filter(r=>S.flt==="all"||r.st===S.flt);
+ return modSw()+`<h1>${t("dash")}</h1><div class="hint">${t("demo")}</div>
+ <div class="stats" style="margin-top:12px">${["pending","approved","allotted","returned"].map((s,i)=>`<div class="stat">${t("stat")[i]}<b>${c(s)}</b></div>`).join("")}</div>
+ <div class="chips">${["all","pending","approved","allotted","returned","rejected"].map(s=>`<button class="${S.flt===s?"on":""}" onclick="S.flt='${s}';render()">${t(s)}</button>`).join("")}</div>
+ ${list.map(r=>`<div class="card req" tabindex="0" onclick="S.sel='${r.id}';render();scrollTo(0,0)" onkeydown="if(event.key==='Enter'){S.sel='${r.id}';render()}"><div class="top"><b>${esc(r.f.name)} <span class="mut">${r.id}</span></b>${stLabel(r.st)}</div><div class="mut">${sn(r.f.store)} ・ ${r.f.from} 〜 ${r.f.to} ・ ${esc(r.f.carName)} ・ ${t("r_"+r.f.reason)}</div></div>`).join("")||`<div class="card">${t("none")}</div>`}
+ <h2>${t("fleet")}</h2><div class="card">${FLEET.map((_,i)=>`<div class="top" style="padding:4px 0"><span>${fn(i)}</span><span class="badge ${busy(i)?"s-pending":"s-allotted"}">${busy(i)?t("busy"):t("free")}</span></div>`).join("")}</div>`;
+}
+function detail(r){
+ const f=r.f,ag=(a)=>a.every(x=>x)?`<span class="badge s-allotted">✓ ${t("agreed")}</span>`:`<span class="badge s-rejected">${t("notag")}</span>`;
+ let act="";
+ if(r.st==="pending")act=`<label class="f">${t("noteIn")}<textarea id="note" rows="2">${esc(r.note)}</textarea></label><div class="row"><button class="btn bad" onclick="setSt('${r.id}','rejected')">${t("reject")}</button><button class="btn ok" onclick="setSt('${r.id}','approved')">${t("approve")}</button></div>`;
+ if(r.st==="approved")act=`<label class="f">${t("allot")}<select id="car"><option value="">${t("pick")}</option>${FLEET.map((_,i)=>`<option value="${i}" ${busy(i)?"disabled":""}>${fn(i)} ${busy(i)?"– "+t("busy"):""}</option>`).join("")}</select></label><div class="row"><span></span><button class="btn pri" onclick="allot('${r.id}')">${t("handover")}</button></div>`;
+ if(r.st==="allotted")act=`<div class="hint"><b>${t("loaner")}:</b> ${fn(r.car)}</div><div class="row"><span></span><button class="btn ok" onclick="setSt('${r.id}','returned')">${t("ret")}</button></div>`;
+ return `<div class="top"><h1>${t("id")} ${r.id}</h1>${stLabel(r.st)}</div>${timeline(r.st)}
+ <div class="card"><h2 style="margin-top:0">${t("detail")}</h2>${summary(f)}
+ <dl class="kv" style="margin-top:8px"><dt>${t("termsT")}</dt><dd>${ag(f.terms)}</dd>${f.reason==="shaken"?`<dt>${t("shakenT")}</dt><dd>${f.fine?ag([1]):ag([0])} ・ ${t("ct")}: ${t(f.ctype||"kei")}</dd>`:""}<dt>${t("antT")}</dt><dd>${ag(f.ant)}</dd><dt>${t("sig")}</dt><dd>${f.sig?`<img src="${f.sig}" alt="${t("sec")}" style="max-width:260px;background:#fff;border:1px solid var(--line);border-radius:6px">`:"—"}</dd></dl></div>
+ <div class="card">${act}</div><button class="btn sec" onclick="S.sel=null;render()">← ${t("close")}</button>`;
+}
+function setSt(id,st){const r=R.find(x=>x.id===id),n=document.getElementById("note");if(n)r.note=n.value;r.st=st;save();render()}
+function allot(id){const v=document.getElementById("car").value;if(v==="")return toast(t("pick"));const r=R.find(x=>x.id===id);r.car=+v;r.st="allotted";save();render()}
+/* ===== Smile Passport ===== */
+const L2=(a,b)=>S.lang==="ja"?a:b,yen=n=>"¥"+Number(n).toLocaleString();
+Object.assign(T.ja,{sub:"代車・スマイルパスポート Web手続き"});Object.assign(T.en,{sub:"Loaner car & Smile Passport online"});
+const AL={t36:"new0",t30:"new0",t24:"u24",t18:"u18",t12:"u12",ts36:"new1",ts30:"new1",ts24:"us24",ts18:"us18",ts12:"us12",ts6:"us6",g0:"u18",g1:"us18"};
+function parse(s){const o={};s.trim().split("\n").forEach(l=>{const[k,v]=l.split(":");o[k]=v.split(",").map(Number)});for(const k in AL)o[k]=o[AL[k]];return o}
+const PRICES={pc:parse(`new0:48000,55600,59900,69800,77800
+new1:99600,111500,118700,132200,145300
+new54:126900,143000,152700,171500,189100
+new2:178500,198900,211500,233900,256600
+u24:41400,48200,51800,61000,68000
+u18:27300,31500,34000,39300,43800
+u12:20700,24100,25900,30500,34000
+us24:93000,104100,110600,123400,135500
+us18:78900,87400,92800,101700,111300
+us12:72300,80000,84700,92900,101500
+us6:58200,63300,66900,71200,77300
+us0:51600,55900,58800,62400,67500`),
+bc:parse(`new0:38700,43900,47600,56900,64900
+new1:90300,99800,106400,119300,132400
+new54:111400,123500,132200,150000,167600
+new2:163000,179400,191000,212400,235100
+u24:35200,40400,43600,52400,59400
+u18:21100,23700,25800,30700,35200
+u12:17600,20200,21800,26200,29700
+us24:86800,96300,102400,114800,126900
+us18:72700,79600,84600,93100,102700
+us12:69200,76100,80600,88600,97200
+us6:55100,59400,62800,66900,73000`),
+cb:parse(`new0:58500,66100,71900,83300,94300
+new1:110100,122000,130700,145700,161800
+new54:144400,160500,172700,194000,216600
+new2:196000,216400,231500,256400,284100
+u24:48400,55200,59800,70000,79000
+u18:34300,38500,42000,48300,54800
+u12:24200,27600,29900,35000,39500
+us24:100000,111100,118600,132400,146500
+us18:85900,94400,100800,110700,122300
+us12:75800,83500,88700,97400,107000
+us6:61700,66800,70900,75700,82800`)};
+const REG=parse(`new0:57306,65384,72032,75842,98720
+new1:115791,128645,138219,143921,177827
+new54:146694,163587,176735,184592,230437
+new2:205179,226848,242922,252671,309544
+u24:52806,60884,67032,70342,92220
+u18:30903,34942,38516,40671,52610
+u12:26403,30442,33516,35171,46110
+us24:111291,124145,133219,138421,171327
+us18:89388,98203,104703,108750,131717
+us12:84888,93703,99703,103250,125217
+us6:62985,67761,71187,73579,85607`);
+const CG={new0:27300,new1:78900,new2:157800,u18:27300,u12:20700,us18:78900,us12:72300,us6:58200,us0:51600,g0:27300,g1:78900,t24:27300,t18:27300,t12:20700,ts24:78900,ts18:78900,ts12:72300,ts6:58200};
+const OPT={},ao=(k,g,a,b)=>OPT[k]={g,a,b};
+ao("new0","n","新車（車検なし）","New car, no shaken");ao("new1","n","新車＋車検①（初回車検付）","New car + 1st shaken");ao("new54","n","新車 54ヶ月","New car, 54 months");ao("new2","n","新車＋車検②（2回目車検付）","New car + 2nd shaken");
+[24,18,12].forEach(n=>ao("u"+n,"u",`U-Car 車検まで${n}ヶ月`,`U-Car, ${n} months to shaken`));
+[24,18,12,6].forEach(n=>ao("us"+n,"u",`U-Car 車検まで${n}ヶ月＋車検`,`U-Car, ${n} months + shaken`));
+ao("us0","u","U-Car 車検時","U-Car at shaken");ao("g0","g","ゴールド（車検なし）","Gold, no shaken");ao("g1","g","ゴールド＋車検","Gold + shaken");
+[36,30,24,18,12].forEach(n=>ao("t"+n,"m",`途中入会 車検まで${n}ヶ月${n<=18?"以上":""}`,`Mid-term, ${n}${n<=18?"+":""} months to shaken`));
+[36,30,24,18,12,6].forEach(n=>ao("ts"+n,"m",`途中入会 車検まで${n}ヶ月${n<=18?"以上":""}＋車検`,`Mid-term, ${n}${n<=18?"+":""} months + shaken`));
+const RNG={new0:[1,30],new1:[1,36],new54:[1,54],new2:[1,60],us0:[36,36],g0:[42,54],g1:[42,60]},S0={36:1,30:6,24:12,18:18,12:24,6:30};
+[24,18,12].forEach(n=>RNG["u"+n]=[S0[n],30]);[24,18,12,6].forEach(n=>RNG["us"+n]=[S0[n],36]);[36,30,24,18,12].forEach(n=>RNG["t"+n]=[S0[n],30]);[36,30,24,18,12,6].forEach(n=>RNG["ts"+n]=[S0[n],36]);
+const PLAN={pc:["プロケア10","ProCare 10"],bc:["ボデーケア","Body Care"],cb:["プロケア10＋ボデーケア","ProCare 10 + Body Care"]};
+const PD={pc:["プロケア10コース（ご来店入庫限定）。","ProCare 10 course (in-store only)."],bc:["コーティング施工車向け。6・18・30・42・54ヶ月目のボデーケアと法定点検・整備。","For coated cars: Body Care visits at 6/18/30/42/54 months plus legal inspections and maintenance."],cb:["プロケア10とボデーケアのセットコース。","ProCare 10 and Body Care bundled in one course."]};
+const JOIN={n:["新車コース","New car","新車購入時にご入会","Join when you buy a new car"],u:["U-Carコース","U-Car","U-Car購入時にご入会","Join when you buy a U-Car"],g:["ゴールドコース","Gold","車検時にご入会","Join at your shaken"],m:["途中入会コース","Mid-term","車検満了日まで12ヶ月以上あればいつでもご入会","Join anytime with 12+ months before shaken expiry"]};
+const CLS=[["軽","Kei"],["コンパクト","Compact"],["ミディアム","Medium"],["ラージ","Large"],["EXラージ","EX Large"],["軽貨物","Kei cargo"]];
+const EXJ=["ピクシスシリーズ・コペン","ヤリス・ヤリスクロス・アクア・シエンタ・ルーミー・ライズ・カローラフィールダー","プリウス・ノア・ヴォクシー・86・RAV4・カローラクロス・カローラスポーツ・カローラツーリング・カローラ","アルファード・ヴェルファイア・ハリアー・ハイエースW","クラウンシリーズ・ランドクルーザー・ランドクルーザープラド・MIRAI・FJクルーザー"],
+EXE=["Pixis series, Copen","Yaris, Yaris Cross, Aqua, Sienta, Roomy, Raize, Corolla Fielder","Prius, Noah, Voxy, 86, RAV4, Corolla Cross, Corolla Sport, Corolla Touring, Corolla","Alphard, Vellfire, Harrier, Hiace W","Crown series, Land Cruiser, Land Cruiser Prado, MIRAI, FJ Cruiser"];
+const ADDR=[["佐賀市鍋島町大字八戸溝150-5","0952-33-5811"],["唐津市和多田大土井5-38","0955-72-8128"],["武雄市武雄町大字武雄70-2","0954-23-4178"],["伊万里市東山代町長浜1419-1","0955-23-8406"],["鹿島市大字森1055番地","0954-63-1535"],["鳥栖市宿町1244番地","0942-81-5255"]];
+const SM=[[1,"a","1ヶ月無料点検","1-month free check"],[6,"c","ボデーケア","Body Care"],[12,"aof","法定12ヶ月点検","12-month check"],[18,"c","ボデーケア","Body Care"],[24,"aof","法定24ヶ月点検","24-month check"],[30,"c","ボデーケア","Body Care"],[36,"aofb","車検（法定24ヶ月点検＋継続検査）","Shaken (24-month inspection + continued inspection)"],[42,"c","ボデーケア","Body Care"],[48,"aof","法定12ヶ月点検","12-month check"],[54,"c","ボデーケア","Body Care"],[60,"aofb","車検（法定24ヶ月点検＋継続検査）","Shaken (24-month inspection + continued inspection)"]];
+const IT={a:["基本点検（補充・調整）","Basic check (top-ups, adjustments)"],o:["エンジンオイル交換","Engine oil change"],f:["オイルフィルター・ワイパーラバー(前)交換、タイヤローテーション","Oil filter, front wiper rubber, tire rotation"],b:["ブレーキフルード交換・下回り洗浄","Brake fluid change, underbody wash"],c:["コーティングメンテ・タイヤ溝点検・空気圧調整","Coating maintenance, tire tread & pressure check"]};
+const TT=[["① 有効期間","1. Validity","お申込みを当社が承認した時点から有効、車検満了日で終了します（5年コースは2回目の車検満了日、新車54ヶ月コースは登録日から54ヶ月で終了）。","Valid from the moment we approve your application until your shaken expiry date (5-year courses: 2nd shaken expiry; New car 54-month: 54 months from registration)."],
+["② 適用範囲","2. Scope","整備項目は所定の内容です。お車はご自身で当社へお持ち込み・お引き取りください。入庫時期を過ぎても有効期間内なら同様の整備を実施します。有効期間経過後は整備を受ける権利を失い、未実施分の返金・支払いへの充当はできません。所定外の修理・整備費用、車両引取・納車料は別途です。県内の全店舗でご利用いただけます。","Maintenance items are as listed. Bring and collect your car yourself. A late visit within the validity period gets the same service. After expiry the right to service is lost, with no refund or credit for unused services. Repairs/services outside the plan and vehicle pick-up/delivery cost extra. Usable at all our stores in the prefecture."],
+["③ 住所変更等","3. Change of address","転居等で住所が変わった場合は、必ず当社へご連絡ください。","If you move, please always tell us your new address."],
+["④ 料金","4. Fees","お申込み時に全額前払い（消費税込）です。特別割引料金のため、他の割引制度は対象外です。","Paid in full at application (tax included). As this is a special discounted rate, other discounts do not apply."],
+["⑤ 中途解約等","5. Early cancellation","ご解約は、代替等で対象車両を手放したとき、他府県への転居で入庫が困難になったとき、やむを得ないと当社が判断したときに限ります。車両の損傷でメンテナンスが不可能になった場合等は当社から解約することがあります。解約金＝（パスポート料金－実施済の整備費用）×80％（残り20％は解約事務手数料。10円未満切り上げ）。未払いの車両代金がある場合は解約金をその一部に充当します。","You may cancel only if you no longer own the vehicle (e.g. trade-in), move out of the prefecture making visits difficult, or we judge it unavoidable. We may cancel if maintenance becomes impossible due to vehicle damage. Refund = (passport price − cost of services already used) × 80% (the other 20% is a cancellation fee; rounded up to the next ¥10). Any unpaid vehicle balance is offset first."]];
+function pblank(){return{plan:"bc",join:"n",opt:"new0",cls:0,other:0,plate:"",car:"",expiry:"",store:0,name:"",kana:"",zip:"",addr:"",tel:"",coat:0,terms:[0,0,0,0,0],sig:"",used:0}}
+function loadPQ(){try{return JSON.parse(localStorage.getItem("stp_pq"))||seedPQ()}catch(e){return seedPQ()}}
+function seedPQ(){const p=Object.assign(pblank(),{plan:"bc",opt:"new1",cls:2,plate:"佐賀 300 さ 12-34",car:"ハリアー",expiry:"2029-10-31",name:"佐賀 太郎",kana:"サガ タロウ",zip:"840-0801",addr:"佐賀市駅前中央1-1-1",tel:"090-1234-5678",coat:1,terms:[1,1,1,1,1]});return[{id:"P-2001",st:"pending",p,start:"",end:"",done:[],note:""}]}
+let PQ=loadPQ();const savePQ=()=>{try{localStorage.setItem("stp_pq",JSON.stringify(PQ))}catch(e){}};
+Object.assign(S,{mod:"loan",pt:"info",ps:0,p:pblank(),psel:null});
+const SG=()=>S.mod==="pass"?S.p:S.f;
+const opts=p=>Object.keys(OPT).filter(k=>OPT[k].g===p.join&&PRICES[p.plan][k]);
+const price=p=>p.cls===5?(p.plan==="pc"?CG[p.opt]:0):PRICES[p.plan][p.opt]?.[p.cls];
+const visits=p=>SM.filter(s=>s[0]>=RNG[p.opt][0]&&s[0]<=RNG[p.opt][1]);
+function fixP(){const p=S.p,o=opts(p);if(!o.includes(p.opt))p.opt=o[0];if(p.cls===5&&!(p.plan==="pc"&&CG[p.opt]))p.cls=0}
+const pbadge=s=>`<span class="badge s-${s==="active"?"allotted":s}">${s==="active"?L2("有効","Active"):t(s)}</span>`;
+function modSw(){return `<div class="chips">${[["loan",L2("代車のお申込み","Loaner car")],["pass",L2("スマイルパスポート","Smile Passport")]].map(x=>`<button class="${S.mod===x[0]?"on":""}" onclick="S.mod='${x[0]}';S.sel=null;S.psel=null;render()">${x[1]}</button>`).join("")}</div>`}
+function rad(n,on,h,txt){return `<label class="chk"><input type="radio" name="${n}" ${on?"checked":""} onchange="${h}"><span>${txt}</span></label>`}
+function pin(k,l,ty,ph){return `<label class="f">${l} <span class="req">*</span><input type="${ty}" value="${esc(S.p[k])}" ${ph?`placeholder="${esc(ph)}"`:""} oninput="S.p.${k}=this.value"></label>`}
+function passCust(){
+ return modSw()+`<h1>${L2("スマイルパスポート","Smile Passport")}</h1><div class="mut">${L2("安心・お得・便利なメンテナンスパック（ご来店入庫限定）","Worry-free, great-value maintenance packs (in-store visits only)")}</div><div class="tabs">${[["info",L2("プラン・特典","Plans & benefits")],["new",L2("お申込み","Apply")],["my",L2("マイパスポート","My passports")+" ("+PQ.length+")"]].map(x=>`<button class="${S.pt===x[0]?"on":""}" onclick="S.pt='${x[0]}';render();scrollTo(0,0)">${x[1]}</button>`).join("")}</div>`+(S.pt==="info"?info():S.pt==="new"?pwiz():pmy());
+}
+function info(){
+ const M=[["料金がおトク！","Great value","当社の通常料金と比較して、断然お得です。","Much cheaper than our regular rates."],["どこでも入庫OK！","Any store","事前のご予約で県内の6店舗どこでも入庫可能です。","Book ahead and visit any of our 6 stores."],["ハガキでご案内！","Reminders by post","入庫時期をハガキでもれなくご案内します。","We mail you when your visit is due."]];
+ return `<div class="g3">${M.map(m=>`<div class="card"><b>${L2(m[0],m[1])}</b><div class="mut">${L2(m[2],m[3])}</div></div>`).join("")}</div>
+ <h2>${L2("コース","Plans")}</h2><div class="g3">${Object.keys(PLAN).map(k=>`<div class="card"><b>${L2(PLAN[k][0],PLAN[k][1])}</b><div class="mut">${L2(PD[k][0],PD[k][1])}</div></div>`).join("")}</div>
+ <h2>${L2("ご入会のタイミング","When you can join")}</h2><div class="card">${Object.keys(JOIN).map(k=>`<div style="padding:4px 0"><b>${L2(JOIN[k][0],JOIN[k][1])}</b> <span class="mut">${L2(JOIN[k][2],JOIN[k][3])}</span></div>`).join("")}<div class="mut" style="margin-top:8px">${L2("各コースに車検付きコースもあります。車検基本料金：24ヶ月定期点検 16,687円〜／継続検査料 10,813円／検査手続き代行費用 12,100円。部品代・技術料・重量税・自賠責保険料・印紙代は別途必要です。※FCEV車（燃料電池自動車）には水素タンク容器再検査など、FCEV車専用の点検や部品代が含まれています。エンジンオイル・フィルター交換は除きます。","Each course also comes with a shaken-included option. Base fees: 24-month inspection from ¥16,687 / inspection fee ¥10,813 / filing agency ¥12,100. Parts, labor, weight tax, compulsory insurance and stamp fees are extra. FCEV (fuel-cell) cars include FCEV-specific checks such as hydrogen tank container re-inspection and parts; engine oil and filter changes are excluded.")}</div></div>
+ <h2>${L2("点検・整備スケジュール","Service schedule")}</h2><div style="overflow-x:auto"><table class="tb"><tr><th></th>${SM.map(s=>`<th>${s[0]}${L2("ヶ月","m")}<br><small>${L2(s[2],s[3])}</small></th>`).join("")}</tr>${Object.keys(IT).map(k=>`<tr><td>${L2(IT[k][0],IT[k][1])}</td>${SM.map(s=>`<td>${s[1].includes(k)?"○":""}</td>`).join("")}</tr>`).join("")}</table></div>
+ <div class="mut" style="margin-top:6px">${L2("※実施月はご入会コースにより異なります。ボデーケアは、CPCプレミアムコーティングエクスGN／ダブルGN、グラスコーティングガードコスメSP、CPCペイントシーラントのいずれかを施工済みのお車が対象です。","※Months depend on your course. Body Care is for cars already coated with CPC Premium Coating EX GN / Double GN, Glass Coating Guard Cosme SP or CPC Paint Sealant.")}</div>
+ <h2>${L2("会員特典","Member benefits")}</h2><div class="card"><b>${L2("コーティングメンテナンス・撥水泡コート 特別価格","Coating maintenance / water-repellent foam coat: member price")}</b><div style="overflow-x:auto"><table class="tb"><tr><th>${L2("クラス","Class")}</th><th>${L2("通常価格","Regular")}</th><th>${L2("会員価格","Member")}</th></tr>${[[0,4500,4000],[1,4500,4000],[2,5000,4500],[3,5500,5000],[4,6500,6000]].map(r=>`<tr><td>${L2(CLS[r[0]][0],CLS[r[0]][1])}</td><td>${yen(r[1])}</td><td><b>${yen(r[2])}</b></td></tr>`).join("")}</table></div><div class="mut">${L2("※キーパーコーティングは除きます。2026年10月現在の価格。予告なく変更する場合があります。","※Excludes Keeper coating. Prices as of October 2026; subject to change.")}</div><p>${L2("・ボディビューティーパックコーティング施工 10%OFF（CPCプレミアムコーティングダブルG／グラスコーティングガードコスメSP）","・10% OFF Body Beauty Pack coating (CPC Premium Coating Double G / Glass Coating Guard Cosme SP)")}<br>${L2("・ボデーケアコース会員：自社代替時、車両下取価格 +20,000円","・Body Care members: +¥20,000 on your trade-in value when replacing your car with us")}</p></div>
+ <h2>${L2("クラス別の主な車種","Models by class")}</h2><div style="overflow-x:auto"><table class="tb">${EXJ.map((e,i)=>`<tr><td style="min-width:110px"><b>${L2(CLS[i][0],CLS[i][1])}</b></td><td style="text-align:left">${L2(e,EXE[i])}</td></tr>`).join("")}</table></div>
+ <h2>${L2("ご利用いただける店舗","Participating stores")}</h2><div class="g3">${STORES.map((s,i)=>`<div class="card"><b>${sn(i)}</b><div class="mut">${ADDR[i][0]}<br>TEL ${ADDR[i][1]}</div></div>`).join("")}</div>
+ <div class="row"><span class="mut">${L2("※ご来店ください。お客様ご自身でお車の持ち込み・引取りをいただくことで特別料金としています。適用項目以外は別途料金となります（実施内容以外のメンテナンス（消耗品交換等）は別途料金）。","※Please visit in person: special rates apply when you bring and collect your car yourself. Items outside the plan (e.g. consumable replacement) are charged separately.")}</span><button class="btn pri" onclick="S.pt='new';render();scrollTo(0,0)">${L2("お申込みへ","Apply now")}</button></div>`;
+}
+function pwiz(){
+ const p=S.p;fixP();const st=["プラン・料金","お車・お客様","確認・同意","署名・送信"],se=["Plan & price","Vehicle & you","Review & agree","Sign & send"];
+ let h=`<div class="steps">${st.map((n,i)=>`<div class="st ${i===S.ps?"on":i<S.ps?"done":""}"><i>${i<S.ps?"✓":i+1}</i><span>${L2(n,se[i])}</span></div>`).join("")}</div><div class="card">`;
+ if(S.ps===0){const pr=price(p),rg=p.plan==="bc"&&p.cls<5?REG[p.opt]?.[p.cls]:0,rn=RNG[p.opt];
+  h+=`<b>${L2("プラン","Plan")}</b>`+Object.keys(PLAN).map(k=>rad("pl",p.plan===k,`S.p.plan='${k}';render()`,`<b>${L2(PLAN[k][0],PLAN[k][1])}</b>`)).join("")+`<b>${L2("ご入会のタイミング","When you join")}</b>`+Object.keys(JOIN).map(k=>rad("jn",p.join===k,`S.p.join='${k}';render()`,`<b>${L2(JOIN[k][0],JOIN[k][1])}</b> <span class="mut">${L2(JOIN[k][2],JOIN[k][3])}</span>`)).join("")
+  +`<div class="grid" style="margin-top:12px"><label class="f">${L2("コース","Course")}<select onchange="S.p.opt=this.value;render()">${opts(p).map(k=>`<option value="${k}" ${p.opt===k?"selected":""}>${L2(OPT[k].a,OPT[k].b)}</option>`).join("")}</select></label><label class="f">${L2("車のクラス","Vehicle class")}<select onchange="S.p.cls=+this.value;render()">${CLS.map((c,i)=>i<5||(p.plan==="pc"&&CG[p.opt])?`<option value="${i}" ${p.cls===i?"selected":""}>${L2(c[0],c[1])}</option>`:"").join("")}</select></label></div>`
+  +(p.join==="n"?chk("S.p.other=this.checked?1:0",p.other,L2("他社で購入した新車","New car bought from another dealer")):"")
+  +`<div class="hint" style="margin-top:12px"><span class="pr">${yen(pr)}</span> ${L2("（税込・全額前払い）","(tax incl., prepaid in full)")}${rg?`<br>${L2("通常料金","Regular price")} ${yen(rg)} ／ <b>${L2("こんなにお得","You save")} ${yen(rg-pr)}</b>`:""}<br>${L2(`対象：${rn[0]}〜${rn[1]}ヶ月目`,`Covers: month ${rn[0]}–${rn[1]}`)}${rn[1]>=36?L2("・車検基本料金込み","; shaken base fee included"):""}</div><div class="mut">${L2("クラスごとの車種は「プラン・特典」をご覧ください。","See Plans & benefits for the models in each class.")}</div>`}
+ if(S.ps===1){h+=`<div class="grid">${pin("plate",L2("登録番号","Registration no."),"text","佐賀 300 あ 12-34")}${pin("car",L2("車種名","Car model"),"text")}${pin("expiry",L2("車検満了日","Shaken expiry date"),"date")}<label class="f">${L2("担当店舗","Preferred store")}<select onchange="S.p.store=+this.value">${STORES.map((s,i)=>`<option value="${i}" ${p.store===i?"selected":""}>${sn(i)}</option>`).join("")}</select></label>${pin("name",t("name"),"text")}${pin("kana",t("kana"),"text")}${pin("zip",t("zip"),"text","840-0801")}${pin("tel",t("tel"),"tel")}</div><div style="margin-top:14px">${pin("addr",t("addr"),"text")}</div>`
+  +(p.plan!=="pc"?chk("S.p.coat=this.checked?1:0",p.coat,L2("次のいずれかのコーティングを施工済みです：CPCプレミアムコーティングエクスGN／ダブルGN、グラスコーティングガードコスメSP、CPCペイントシーラント","My car has one of these coatings: CPC Premium Coating EX GN / Double GN, Glass Coating Guard Cosme SP, CPC Paint Sealant")):"")}
+ if(S.ps===2){h+=TT.map((x,i)=>`<div style="margin:8px 0"><b>${L2(x[0],x[1])}</b><div class="mut">${L2(x[2],x[3])}</div>${chk(`S.p.terms[${i}]=this.checked?1:0`,p.terms[i],L2("同意します","I agree"))}</div>`).join("")
+  +`<div class="hint"><b>${L2("解約金の目安","Cancellation estimate")}</b><br>${L2("実施済みの整備費用（円）","Cost of services already used (¥)")}: <input type="text" inputmode="numeric" style="width:130px" value="${p.used}" oninput="S.p.used=+this.value||0;document.getElementById('rf').textContent=yen(rf())"> → ${L2("解約金","Refund")} <b id="rf">${yen(rf())}</b></div>`}
+ if(S.ps===3){h+=`<h2 style="margin-top:0">${t("review")}</h2>${psum(p)}<h2>${t("sigT")}</h2><canvas id="sig" aria-label="${t("sigT")}"></canvas><div class="row" style="margin-top:8px"><span class="mut">${t("sigNote")}${new Date().toLocaleDateString(S.lang==="ja"?"ja-JP":"en-GB")}</span><button class="btn sec" onclick="clearSig()">${t("clear")}</button></div>`}
+ return h+`<div class="row"><button class="btn sec" ${S.ps===0?"style='visibility:hidden'":""} onclick="S.ps--;render();scrollTo(0,0)">${t("back")}</button>`+(S.ps<3?`<button class="btn pri" onclick="pnext()">${t("next")}</button>`:`<button class="btn pri" onclick="psubmit()">${t("submit")}</button>`)+`</div></div>`;
+}
+const rf=()=>Math.ceil(Math.max(0,price(S.p)-S.p.used)*.8/10)*10;
+function pnext(){const p=S.p;let e="";
+ if(S.ps===1){if(!p.plate||!p.car||!p.expiry||!p.name||!p.kana||!p.zip||!p.addr||!p.tel)e=t("errReq");else if(p.plan!=="pc"&&!p.coat)e=L2("ボデーケアは対象コーティングの施工が必要です。","Body Care requires one of the listed coatings.")}
+ if(S.ps===2&&p.terms.includes(0))e=t("errAgree");
+ if(e)return toast(e);S.ps++;render();scrollTo(0,0)}
+function psum(p){return `<dl class="kv"><dt>${L2("プラン","Plan")}</dt><dd>${L2(PLAN[p.plan][0],PLAN[p.plan][1])}</dd><dt>${L2("コース","Course")}</dt><dd>${L2(OPT[p.opt].a,OPT[p.opt].b)} / ${L2(CLS[p.cls][0],CLS[p.cls][1])}</dd><dt>${L2("料金","Price")}</dt><dd><b>${yen(price(p))}</b></dd><dt>${L2("お車","Car")}</dt><dd>${esc(p.car)} / ${esc(p.plate)} (${L2("車検満了","shaken")} ${p.expiry})</dd><dt>${L2("お客様","Customer")}</dt><dd>${esc(p.name)} (${esc(p.kana)}) 〒${esc(p.zip)} ${esc(p.addr)} ${esc(p.tel)}</dd><dt>${t("store")}</dt><dd>${sn(p.store)}</dd></dl>`}
+function psubmit(){if(!S.p.sig)return toast(t("errSig"));PQ.unshift({id:"P-"+(2001+PQ.length),st:"pending",p:S.p,start:"",end:"",done:[],note:""});savePQ();S.p=pblank();S.ps=0;S.pt="my";render();scrollTo(0,0);toast(L2("お申込みを受け付けました。店頭でお支払い・ご確認をお願いします。","Application received. Please pay and confirm in store."))}
+function vlist(q,v){return `<div class="mut">${L2("実施済み","Completed")} ${q.done.length}/${v.length}</div><div class="chips">${v.map(s=>`<button style="cursor:default" class="${q.done.includes(s[0])?"on":""}">${q.done.includes(s[0])?"✓ ":""}${s[0]}${L2("ヶ月","m")} ${L2(s[2],s[3])}</button>`).join("")}</div>`}
+function pcard(q,stf){const p=q.p;return `<div class="card ${stf?"req":""}" ${stf?`tabindex="0" onclick="S.psel='${q.id}';render();scrollTo(0,0)"`:""}><div class="top"><b>${L2(PLAN[p.plan][0],PLAN[p.plan][1])} <span class="mut">${q.id}</span></b>${pbadge(q.st)}</div><div class="mut">${stf?esc(p.name)+" ・ ":""}${L2(OPT[p.opt].a,OPT[p.opt].b)} ・ ${L2(CLS[p.cls][0],CLS[p.cls][1])} ・ ${yen(price(p))}</div>${q.st==="active"&&!stf?`<div class="mut">${L2("有効期間","Valid")}: ${q.start} 〜 ${q.end}</div>${vlist(q,visits(p))}`:""}${q.st==="pending"&&!stf?`<div class="mut">${L2("店頭でのお支払い確認後に有効になります。","Becomes active after payment is confirmed in store.")}</div>`:""}${q.note?`<p><b>${t("note")}:</b> ${esc(q.note)}</p>`:""}</div>`}
+function pmy(){return PQ.length?PQ.map(q=>pcard(q,false)).join(""):`<div class="card">${t("none")}</div>`}
+function staffPass(){
+ if(S.psel)return pdetail(PQ.find(x=>x.id===S.psel));
+ const c=s=>PQ.filter(q=>q.st===s).length;
+ return modSw()+`<h1>${L2("パスポート受付","Passport applications")}</h1><div class="stats" style="grid-template-columns:repeat(3,1fr)">${[["pending",t("pending")],["active",L2("有効","Active")],["rejected",t("rejected")]].map(x=>`<div class="stat">${x[1]}<b>${c(x[0])}</b></div>`).join("")}</div><div style="margin-top:12px">${PQ.map(q=>pcard(q,true)).join("")}</div>`;
+}
+function pdetail(q){const p=q.p;let a="";
+ if(q.st==="pending")a=`<div class="grid"><label class="f">${L2("有効開始日","Start date")}<input type="date" id="pst" value="${new Date().toISOString().slice(0,10)}"></label><label class="f">${L2("有効終了日（車検満了日）","End date (shaken expiry)")}<input type="date" id="pen" value="${p.expiry}"></label></div><label class="chk"><input type="checkbox" id="ppd"><span>${L2("全額のお支払いを確認しました","Full payment received")} (${yen(price(p))})</span></label><label class="f">${t("noteIn")}<textarea id="pnt" rows="2"></textarea></label><div class="row"><button class="btn bad" onclick="pset('${q.id}','rejected')">${t("reject")}</button><button class="btn pri" onclick="pset('${q.id}','active')">${L2("承認して有効化","Approve & activate")}</button></div>`;
+ if(q.st==="active")a=`<div class="mut">${q.start} 〜 ${q.end}</div>`+vlist(q,visits(p))+`<div class="row"><span></span><button class="btn pri" onclick="pvisit('${q.id}')">${L2("入庫完了を記録","Record completed visit")}</button></div>`;
+ return `<div class="top"><h1>${q.id}</h1>${pbadge(q.st)}</div><div class="card">${psum(p)}<dl class="kv"><dt>${t("sig")}</dt><dd>${p.sig?`<img src="${p.sig}" alt="${t("sec")}" style="max-width:260px;background:#fff;border:1px solid var(--line);border-radius:6px">`:"—"}</dd></dl></div><div class="card">${a||"—"}</div><button class="btn sec" onclick="S.psel=null;render()">← ${t("close")}</button>`}
+function pset(id,st){const q=PQ.find(x=>x.id===id);q.note=document.getElementById("pnt").value;
+ if(st==="active"){const a=document.getElementById("pst").value,b=document.getElementById("pen").value;if(!document.getElementById("ppd").checked||!a||!b)return toast(L2("支払い確認と有効期間の入力が必要です。","Confirm payment and enter the validity dates."));q.start=a;q.end=b}
+ q.st=st;savePQ();render()}
+function pvisit(id){const q=PQ.find(x=>x.id===id),n=visits(q.p).find(s=>!q.done.includes(s[0]));if(n){q.done.push(n[0]);savePQ();render()}}
+render();
+</script>
+<script>
+/* ===== Audit fixes: every field from the paper documents ===== */
+const today=()=>new Date().toISOString().slice(0,10);
+const rw=d=>{if(!d)return"—";const[y,m,dd]=d.split("-").map(Number);if(S.lang!=="ja")return d;const r=y-2018;return`令和${r===1?"元":r}年${m}月${dd}日`};
+const addM=(d,n)=>{const x=new Date(d);x.setMonth(x.getMonth()+n);return x.toISOString().slice(0,10)};
+const N1="平成18年6月から、都道府県公安委員会（警察）が放置駐車違反の車両の使用者に放置違反金の納付を命ずる制度がスタートし、この命令を受けたにもかかわらず、放置違反金を支払わないまま都道府県公安委員会から督促を受けた方は、これを納付しなければ、当該命令に係る自動車の次回の車検（継続検査又は構造等変更検査）を完了することができないこととなりました（道路交通法第51条の7第1項及び第2項）。したがって、放置違反金を滞納されている方は、速やかにこれを納付し、その証明書を車検に際してご提示いただくようお願い申し上げます（納付いただけない場合は、法令の規定により、都道府県公安委員会が行う滞納処分の対象となります。）。納付書をお持ちでない方は、再発行いたしますので、各都道府県警察本部交通部にお問い合わせ下さい。また、車検業務を円滑に完了するため、自動車整備事業者が皆様及び皆様のお車に関する情報を警察に照会し、必要な確認を行う場合には、以下の同意書が必要となります。（警察庁・国土交通省）",
+N1e="Since June 2006, prefectural public safety commissions (police) order users of illegally parked vehicles to pay a parking-violation fine. If you ignore the order and are then served a reminder, the next shaken (continued or structural-change inspection) of that vehicle cannot be completed until it is paid (Road Traffic Act Art. 51-7, paras. 1–2). Please pay any unpaid fine promptly and show the proof of payment at shaken; otherwise it becomes subject to collection measures. If you have lost the payment slip, it can be reissued by the traffic department of the prefectural police HQ. To complete shaken smoothly, the maintenance business may check information about you and your car with the police, which requires the consent below. (National Police Agency / MLIT)",
+N2="平成29年4月より、継続検査（車検）に必要な書類の作成や申請手続きを電磁的方法により行うことが可能となりましたが、電磁的方法により行う場合は、法令の規定により、事前にお客様（使用者）の承諾を頂くことが必要となっています。（法令の規定：道路運送車両法第94条の5第2項、同施行令第10条及び自動車損害賠償保障法第9条第2項、同施行令第1条をいう。）",
+N2e="Since April 2017, documents and filing for shaken may be handled electronically, but by law the user’s prior consent is required (Road Vehicles Act Art. 94-5 para. 2 and its Order Art. 10; Automobile Liability Security Act Art. 9 para. 2 and its Order Art. 1).",
+N3="※「電磁的方法」とは：紙による申請や関係書類の国への提出に代えて、電子データにより国へ送信するものです。なお、当該電子データは、継続検査（車検）の手続き以外には使用されません。",
+N3e="“Electronic method” means sending electronic data to the national government instead of submitting paper applications or documents. The data is used only for the shaken procedure.",
+ANI="平成24年1月より「佐賀県暴力団排除条例」が施行され、弊社においては契約の相手が暴力団関係者ではないことを確認すること、また暴力団関係者であることが判明した場合には契約を解除できるようにすることとされました。場合によっては、弊社として佐賀県警察本部に照会させていただく事があります。誠に恐縮ですが、お客様には下記項目についてご確認をいただき、ご理解とご協力を賜りますよう宜しくお願いいたします。",
+ANIe="Since January 2012 the Saga Prefecture Anti-Organized-Crime Ordinance requires us to confirm that our contract counterparties are not linked to organized crime and to be able to cancel contracts if they turn out to be. We may inquire with the Saga Prefectural Police HQ where necessary. Thank you for confirming the items below.";
+Object.assign(T.ja,{terms:["貸出車両は、十分な注意、責任を持って管理をお願いします。","代車には自動車保険を付帯しておりますが、万一の事故の際は、お客様ご自身が加入されている自動車保険を優先し事故の対応、修理費用のお支払いをお願いします。尚、その際の代車修理は当社へのご入庫となります。","貸出車両の又貸しは、お客様ご自身で加入されている自動車保険の適用外となりますので、又貸しはしないで下さい。","貸出車両はすべて禁煙車です。又、ペットの同乗もお控え下さい。","貸出車両に不具合を感じた際は、速やかに運行を中止し連絡をお願いします。","ドライブレコーダー搭載車は録音・録画が機能しておりますのでご承知おき下さい。"],
+excess:"※お客様の保険で対応できない場合は、免責金額(上限10万円)をご負担いただきます。",accept:"上記留意事項を承諾し、安全運転を致します。",
+plate:"登録番号／車両番号",chassis:"車台番号",corp:"社名（法人の場合）",
+fine:"この度、継続検査等の申請を貴社（店）に依頼するにあたり、貴社（店）が私及び私の上記車両に係る放置違反金の滞納の有無に関する情報を（自動車整備振興会を通じて）警察に照会・確認することに同意します。",
+ep1:"継続検査の申請を電磁的方法により行う場合、申請代理人に対し、申請に必要な情報を提供すること及び申請を委任すること。",ep2:"保安基準適合証の交付に代えて、当該証明書に記載すべき事項を電磁的方法により登録情報処理機関に提供すること。",ep3:"自動車損害賠償責任保険証明書又は自動車損害賠償責任共済証明書に記載すべき事項を、電磁的方法により登録情報処理機関に提供すること。",
+ant:["お客様は、「暴力団、暴力団員、暴力団関係企業・団体またはこれらの密接交際者及び過去に民事・行政問題等に関し違法な行為・不当な要求行為を行った履歴のある方」ではありません。","今後、「反社会的勢力」との関わりが認められた場合は、当社との一切の契約の解除に応じたうえで、当社から貸与されている物品等が有る場合は速やかに返却し、当社に対する損害賠償の請求をしないことに同意します。"],
+errCt:"車両の種別・放置違反金照会への同意・車台番号をご入力ください。"});
+Object.assign(T.en,{accept:"I accept the above notes and will drive safely.",plate:"Registration / vehicle no.",chassis:"Chassis number",corp:"Company name (if applicable)",
+fine:"In asking you to handle my continued inspection, I consent to your checking with the police (via the Automobile Maintenance Promotion Association) whether any parking-violation fine is unpaid for me and my vehicle above.",
+ep2:"Instead of issuing a safety-standard conformity certificate, I consent to its details being provided electronically to the registration information processing agency.",ep3:"I consent to the details of my compulsory automobile liability insurance (or mutual aid) certificate being provided electronically to the registration information processing agency.",
+errCt:"Please enter the vehicle type, consent to the fine inquiry, and the chassis number."});
+TT[0][2]="お申込みを当社が承認した時点を持って有効となり、車検満了日をもって終了となります。※5年コースをお申込みの場合、2回目の車検満了日をもって終了となります。※新車54ヶ月コースをお申込みの場合、お車の登録日より54ヶ月経過をもって終了となります。";
+TT[4][2]="下記の事由に該当する場合のみ、お客様より中途解約できます。1) 代替等により、当スマイルパスポートの対象となる車両の保有を中止したとき 2) 他府県への転居により当社への入庫が困難になったとき 3) やむを得ないと当社が判断したとき。車両の損傷により、メンテナンスが不可能になったとき、または当社が定める事由に該当するときは、当社より中途解約させていただきます。中途解約の場合は、下記の計算式により解約金を算出し、返金いたします。但し、未払いの車両代金等ある場合は、解約金をその支払いの一部に充当します。解約金＝（スマイルパスポート料金－解約時点で実施済の整備費用）×80％　注1：残りの20％については、解約事務手数料とします。注2：10円未満は切り上げとします。";
+TT[4][3]="You may cancel only if (1) you no longer own the vehicle (e.g. trade-in), (2) you move out of the prefecture making visits difficult, or (3) we judge it unavoidable. We may cancel if maintenance becomes impossible due to vehicle damage or for other reasons we specify. Refund = (passport price − cost of services already used) × 80% (note 1: the other 20% is a cancellation fee; note 2: amounts under ¥10 are rounded up). Any unpaid vehicle balance is offset first.";
+const PC1=["① 有効期間","1. Validity","お申込みを当社が承認した時点を持って有効となり、車検満了日をもって終了となります。※乗用車5年コース・軽貨物車4年コースをお申込みの場合、2回目の車検満了日をもって終了となります。※新車54ヶ月コースをお申込みの場合、お車の登録日より54ヶ月経過をもって終了となります。","Valid from the moment we approve your application until your shaken expiry date. Passenger-car 5-year / kei-cargo 4-year courses end at the 2nd shaken expiry date. The new-car 54-month course ends 54 months after the registration date."];
+const tt=(p,i)=>i===0&&p.plan==="pc"?PC1:TT[i];
+/* course codes printed on the paper forms */
+const CD={pc:`new0:A,abcdef
+new1:B,abcdef
+new54:R,abcde
+new2:C,abcdef
+u24:L,abcde
+u18:L,pqrst
+u12:l,fghij
+us24:M,abcde
+us18:M,pqrst
+us12:m,fghij
+us6:m,uvwxy
+us0:m,ABCDE
+g0:D,abcdef
+g1:E,abcdef
+t36:Q,abcde
+t30:Q,pqrst
+t24:q,fghij
+t18:q,uvwxy
+t12:q,ABCDE
+ts36:V,abcde
+ts30:V,pqrst
+ts24:v,fghij
+ts18:v,uvwxy
+ts12:v,ABCDE
+ts6:v,PQRST`,bc:`new0:A,ghijk
+new1:B,ghijk
+new54:R,ghijk
+new2:C,ghijk
+u24:L,fghij
+u18:L,uvwxy
+u12:l,klmno
+us24:M,fghij
+us18:M,uvwxy
+us12:m,klmno
+us6:m,01234
+g0:D,ghijk
+g1:E,ghijk
+t36:Q,fghij
+t30:Q,uvwxy
+t24:q,klmno
+t18:q,01234
+t12:q,FGHIJ
+ts36:V,fghij
+ts30:V,uvwxy
+ts24:v,klmno
+ts18:v,01234
+ts12:v,FGHIJ
+ts6:v,UVWXY`,cb:`new0:a,lmnop
+new1:b,lmnop
+new54:r,lmnop
+new2:c,lmnop
+u24:f,klmno
+u18:f,pqrst
+u12:f,uvwxy
+us24:g,klmno
+us18:g,pqrst
+us12:g,uvwxy
+us6:g,12345
+g0:d,lmnop
+g1:e,lmnop
+t36:h,abcde
+t30:h,fghij
+t24:h,klmno
+t18:h,pqrst
+t12:h,uvwxy
+ts36:j,abcde
+ts30:j,fghij
+ts24:j,klmno
+ts18:j,pqrst
+ts12:j,uvwxy
+ts6:j,12345`};
+const CDP={};for(const k in CD){CDP[k]={};CD[k].split("\n").forEach(l=>{const[a,b]=l.split(":");CDP[k][a]=b.split(",")})}
+const CGC={u18:"7L",u12:"8L",us18:"7M",us12:"8M",us6:"9M",us0:"0M",t24:"6Q",t18:"7Q",t12:"8Q",ts24:"6V",ts18:"7V",ts12:"8V",ts6:"9V"};
+function code(p){const r=CDP[p.plan][p.opt];if(!r)return"";let pre=r[0];if(p.join==="n"&&p.other)pre=({A:"X",B:"Y",R:"W",C:"Z",a:"x",b:"y",r:"w",c:"z"})[pre]||pre;return p.cls===5?(CGC[p.opt]||pre+"f"):pre+r[1][p.cls]}
+const hasShk=p=>RNG[p.opt][1]>=36,pltC=p=>[p.pa,p.pc,p.pk,p.pn].filter(Boolean).join(" "),plt=p=>p.plate||pltC(p);
+const docList=d=>`<div class="chips">${d.map(x=>`<button style="cursor:default" class="${x[2]?"on":""}">${x[2]?"✓ ":"○ "}${L2(x[0],x[1])}</button>`).join("")}</div>`;
+function inpo(k,l,ty){return `<label class="f">${l}<input type="${ty}" value="${esc(S.f[k])}" oninput="S.f.${k}=this.value"></label>`}
+function shk(o,P,plate){return `<h2>${t("shakenT")}</h2><div class="mut">${L2("事業場名：佐賀トヨペット株式会社 佐賀店","Business: Saga Toyopet Co., Ltd. – Saga Store")}</div><details><summary class="mut" style="cursor:pointer">${L2("ご案内（全文）","Notice (full text)")}</summary><p class="mut">${L2(N1,N1e)}</p><p class="mut">${L2(N2,N2e)}</p></details>
+ <b>${L2("1. 放置違反金の滞納情報照会に関する同意","1. Consent to the parking-fine inquiry")}</b><div class="mut">${t("ctype")}</div><div class="grid" style="grid-template-columns:repeat(3,1fr)">${["kei","reg","two"].map(k=>`<label class="chk" style="margin:4px 0"><input type="radio" name="ct${P}" ${o.ctype===k?"checked":""} onchange="${P}.ctype='${k}'">${t(k)}</label>`).join("")}</div>${chk(`${P}.fine=this.checked?1:0`,o.fine,t("fine"))}
+ <b>${L2("2. 電磁的方法による申請手続きの承諾（チェックした事項に承諾します）","2. Consent to electronic filing (tick the items you consent to)")}</b>${[1,2,3].map(i=>chk(`${P}.ep[${i-1}]=this.checked?1:0`,o.ep[i-1],t("ep"+i))).join("")}<div class="mut">${L2(N3,N3e)}</div>
+ <div class="grid" style="margin-top:10px"><div class="mut">${t("plate")}: <b>${esc(plate)||"—"}</b></div><label class="f">${t("chassis")} <span class="req">*</span><input type="text" value="${esc(o.chassis)}" oninput="${P}.chassis=this.value"></label></div>`}
+function antB(o,P){return `<h2>${t("antT")}</h2><p class="mut">${L2(ANI,ANIe)}</p>`+t("ant").map((x,i)=>chk(`${P}.ant[${i}]=this.checked?1:0`,o.ant[i],`${["①","②"][i]} ${x} 【${t("agree")}】`)).join("")}
+function inspUI(q,kind){const i=q.insp||{};return `<h2 style="margin-top:0">${L2("放置違反金滞納情報照会書（自動車整備事業者用）","Parking-fine inquiry sheet (for the maintenance business)")}</h2><dl class="kv"><dt>${L2("認証番号","Certification no.")}</dt><dd>2-29</dd><dt>${L2("整備事業者名","Business name")}</dt><dd>佐賀トヨペット株式会社 佐賀店</dd><dt>TEL / FAX</dt><dd>0952-33-5711 / 0952-33-6713</dd></dl>
+ <div class="grid"><label class="f">${L2("宛先（御中）","Addressed to")}<input type="text" id="iTo" value="${esc(i.to||"")}"></label><label class="f">${L2("照会日","Inquiry date")}<input type="date" id="iDt" value="${i.dt||today()}"></label>
+ <label class="f">${L2("回答：自動車検査証の返付拒否の対象か","Result: subject to refusal to return the inspection certificate?")}<select id="iRs"><option value="">—</option><option value="no" ${i.rs==="no"?"selected":""}>${L2("対象ではない","Not subject")}</option><option value="yes" ${i.rs==="yes"?"selected":""}>${L2("対象である","Subject")}</option></select></label>
+ <label class="f">${L2("違反番号（対象の場合）","Violation no. (if subject)")}<input type="text" id="iVn" value="${esc(i.vn||"")}"></label><label class="f">${L2("担当者（印）","Staff in charge (seal)")}<input type="text" id="iSt" value="${esc(i.st||"")}"></label></div>
+ ${i.rs==="yes"?`<div class="hint" style="background:var(--badbg);color:var(--err);margin-top:8px">${L2("放置違反金を納付し、納付証明書を車検時にご提示いただく必要があります。","The fine must be paid and proof shown at shaken.")}</div>`:""}<div class="row"><span></span><button class="btn sec" onclick="setInsp('${kind}','${q.id}')">${L2("照会結果を記録","Save inquiry result")}</button></div>`}
+function setInsp(kind,id){const q=(kind==="r"?R:PQ).find(x=>x.id===id),g=i=>document.getElementById(i).value;q.insp={to:g("iTo"),dt:g("iDt"),rs:g("iRs"),vn:g("iVn"),st:g("iSt")};kind==="r"?save():savePQ();toast(L2("記録しました。","Saved."));render()}
+/* ---------- loaner ---------- */
+function blank(){return{store:0,reason:"shaken",carName:"",plate:"",chassis:"",corp:"",from:today(),to:"",name:"",kana:"",zip:"",addr:"",tel:"",email:"",terms:[0,0,0,0,0,0],accept:0,fine:0,ctype:"",ep:[0,0,0],ant:[0,0],sig:""}}
+function summary(f){return `<dl class="kv"><dt>${t("store")}</dt><dd>${sn(f.store)}</dd><dt>${t("reason")}</dt><dd>${t("r_"+f.reason)}</dd><dt>${t("car")}</dt><dd>${esc(f.carName)} / ${esc(f.plate)}${f.chassis?` / ${t("chassis")}: ${esc(f.chassis)}`:""}</dd><dt>${t("period")}</dt><dd>${rw(f.from)} 〜 ${rw(f.to)}</dd><dt>${t("name")}</dt><dd>${esc(f.name)} (${esc(f.kana)}) ${esc(f.corp||"")}</dd><dt>${t("addr")}</dt><dd>〒${esc(f.zip)} ${esc(f.addr)}</dd><dt>${t("tel")}</dt><dd>${esc(f.tel)} ${esc(f.email||"")}</dd></dl>`}
+function wizard(){
+ const names=["s0","s1","s2","s3"],f=S.f;
+ let h=`<div class="steps">${names.map((n,i)=>`<div class="st ${i===S.step?"on":i<S.step?"done":""}"><i>${i<S.step?"✓":i+1}</i><span>${t(n)}</span></div>`).join("")}</div><div class="card">`;
+ if(S.step===0)h+=`<div class="grid"><label class="f">${t("store")}<select onchange="S.f.store=+this.value">${STORES.map((s,i)=>`<option value="${i}" ${f.store===i?"selected":""}>${sn(i)}</option>`).join("")}</select></label><label class="f">${t("reason")}<select onchange="S.f.reason=this.value">${REASONS.map(r=>`<option value="${r}" ${f.reason===r?"selected":""}>${t("r_"+r)}</option>`).join("")}</select></label>${inp("carName",t("carName"),"text")}${inp("plate",t("plate"),"text","佐賀 300 あ 12-34")}${inp("from",t("from"),"date")}${inp("to",t("to"),"date")}</div><div class="mut" style="margin-top:10px">${L2("貸出車両の車種名・登録番号は、店頭でお車をお渡しする際に当社が記入します。","The loaner’s model and registration number are filled in by our staff at hand-over.")}</div>`;
+ if(S.step===1)h+=`<div class="grid">${inp("name",t("name"),"text")}${inp("kana",t("kana"),"text")}${inp("zip",t("zip"),"text","840-0801")}${inp("tel",t("tel"),"tel")}</div><div style="margin-top:14px">${inp("addr",t("addr"),"text")}</div><div class="grid" style="margin-top:14px">${inpo("corp",t("corp"),"text")}${inpo("email",t("email"),"email")}</div>`;
+ if(S.step===2)h+=`<h2 style="margin-top:0">${t("termsT")}</h2>`+t("terms").map((x,i)=>chk(`S.f.terms[${i}]=this.checked?1:0`,f.terms[i],`${i+1}. ${x}`)).join("")+`<div class="mut">${t("excess")}</div>`+chk("S.f.accept=this.checked?1:0",f.accept,t("accept"))+(f.reason==="shaken"?shk(f,"S.f",f.plate):"")+antB(f,"S.f");
+ if(S.step===3)h+=`<h2 style="margin-top:0">${t("review")}</h2>${summary(f)}<h2>${t("sigT")}</h2><canvas id="sig" aria-label="${t("sigT")}"></canvas><div class="row" style="margin-top:8px"><span class="mut">${t("sigNote")}${rw(today())}<br>${L2("この署名は、車両借用書・確認書"+(f.reason==="shaken"?"・放置違反金滞納情報照会同意書／継続検査確認事項及び承諾書":"")+"に適用されます。","This signature applies to the vehicle loan agreement, the confirmation"+(f.reason==="shaken"?", and the parking-fine consent / continued-inspection confirmation":"")+".")}</span><button class="btn sec" onclick="clearSig()">${t("clear")}</button></div>`;
+ return h+`<div class="row"><button class="btn sec" ${S.step===0?"style='visibility:hidden'":""} onclick="S.step--;render();scrollTo(0,0)">${t("back")}</button>`+(S.step<3?`<button class="btn pri" onclick="nextStep()">${t("next")}</button>`:`<button class="btn pri" onclick="submitReq()">${t("submit")}</button>`)+`</div></div>`;
+}
+function nextStep(){const f=S.f;let e="";
+ if(S.step===0){if(!f.carName||!f.plate||!f.from||!f.to)e=t("errReq");else if(f.to<f.from)e=t("errDate")}
+ if(S.step===1){if(!f.name||!f.kana||!f.zip||!f.addr||!f.tel)e=t("errReq");else if(!/^\d{3}-?\d{4}$/.test(f.zip))e=L2("郵便番号は 840-0801 の形式で入力してください。","Postal code format: 840-0801.")}
+ if(S.step===2){if(f.terms.includes(0)||!f.accept||f.ant.includes(0))e=t("errAgree");else if(f.reason==="shaken"&&(!f.ctype||!f.fine||!f.chassis.trim()))e=t("errCt")}
+ if(e)return toast(e);S.step++;render();scrollTo(0,0)}
+function submitReq(){if(!S.f.sig)return toast(t("errSig"));R.unshift({id:"R-"+(1001+R.length),st:"pending",f:S.f,note:"",car:-1,at:Date.now(),appDate:today(),insp:{}});save();S.f=blank();S.step=0;S.tab="my";render();toast(t("done"));scrollTo(0,0)}
+function myList(){if(!R.length)return `<div class="card">${t("none")}</div>`;return R.map(r=>`<div class="card"><div class="top"><b>${t("id")} ${r.id}</b>${stLabel(r.st)}</div><div class="mut">${sn(r.f.store)} ・ ${rw(r.lf||r.f.from)} 〜 ${rw(r.lt||r.f.to)} ・ ${esc(r.f.carName)}</div>${timeline(r.st)}${r.car>=0?`<div class="hint"><b>${t("loaner")}:</b> ${fn(r.car)}</div>`:""}${r.note?`<p><b>${t("note")}:</b> ${esc(r.note)}</p>`:""}${r.st==="approved"||r.st==="allotted"?`<div class="mut">${t("bringId")}</div>`:""}<details><summary class="mut" style="cursor:pointer">${L2("お客様控え","Customer copy")}</summary>${summary(r.f)}</details></div>`).join("")}
+function detail(r){
+ const f=r.f,sh=f.reason==="shaken",ok=a=>a.every(x=>x)?`<span class="badge s-allotted">✓ ${t("agreed")}</span>`:`<span class="badge s-rejected">${t("notag")}</span>`;
+ const docs=[["車両借用書（店舗保管用）R8.3改訂","Vehicle loan agreement (store copy), rev. R8.3",f.terms.every(x=>x)&&!!f.accept],["確認書（暴力団排除）","Anti-organized-crime confirmation",f.ant.every(x=>x)]].concat(sh?[["放置違反金滞納情報照会における同意書／継続検査確認事項及び承諾書","Parking-fine consent / continued-inspection confirmation",!!f.fine&&!!f.chassis],["放置違反金滞納情報照会書（整備事業者用）","Parking-fine inquiry sheet (dealer)",!!(r.insp&&r.insp.rs)]]:[]);
+ let a="";
+ if(r.st==="pending")a=`<label class="f">${t("noteIn")}<textarea id="note" rows="2">${esc(r.note)}</textarea></label><div class="row"><button class="btn bad" onclick="setSt('${r.id}','rejected')">${t("reject")}</button><button class="btn ok" onclick="setSt('${r.id}','approved')">${t("approve")}</button></div>`;
+ if(r.st==="approved")a=`<div class="grid"><label class="f">${t("allot")}<select id="car"><option value="">${t("pick")}</option>${FLEET.map((_,i)=>`<option value="${i}" ${busy(i)?"disabled":""}>${fn(i)} ${busy(i)?"– "+t("busy"):""}</option>`).join("")}</select></label><span></span><label class="f">${L2("貸出期間：開始","Loan period: from")}<input type="date" id="lf" value="${r.lf||f.from}"></label><label class="f">${L2("貸出期間：終了","Loan period: to")}<input type="date" id="lt" value="${r.lt||f.to}"></label></div><div class="row"><span></span><button class="btn pri" onclick="allot('${r.id}')">${t("handover")}</button></div>`;
+ if(r.st==="allotted")a=`<dl class="kv"><dt>${L2("貸出車両 車種名","Loaner model")}</dt><dd>${FLEET[r.car][S.lang==="ja"?0:1]}</dd><dt>${L2("登録番号","Registration no.")}</dt><dd>${FLEET[r.car][2]}</dd><dt>${L2("貸出期間","Loan period")}</dt><dd>${rw(r.lf)} 〜 ${rw(r.lt)}</dd></dl><div class="row"><span></span><button class="btn ok" onclick="setSt('${r.id}','returned')">${t("ret")}</button></div>`;
+ return `<div class="top"><h1>${t("id")} ${r.id}</h1>${stLabel(r.st)}</div>${timeline(r.st)}${docList(docs)}
+ <div class="card"><h2 style="margin-top:0">${t("detail")}</h2>${summary(f)}<dl class="kv" style="margin-top:8px"><dt>${t("termsT")}</dt><dd>${ok(f.terms.concat([f.accept]))}</dd>${sh?`<dt>${t("shakenT")}</dt><dd>${f.fine?ok([1]):ok([0])} ・ ${t("ct")}: ${f.ctype?t(f.ctype):"—"} ・ ${L2("電磁的方法","e-filing")}: ${f.ep.map(x=>x?"✓":"–").join(" ")}</dd>`:""}<dt>${t("antT")}</dt><dd>${ok(f.ant)}</dd><dt>${t("sig")}</dt><dd>${f.sig?`<img src="${f.sig}" alt="${t("sec")}" style="max-width:260px;background:#fff;border:1px solid var(--line);border-radius:6px"> <div class="mut">${rw(r.appDate||today())}</div>`:"—"}</dd></dl></div>
+ <div class="card">${a}</div>${sh?`<div class="card">${inspUI(r,"r")}</div>`:""}<button class="btn sec" onclick="S.sel=null;render()">← ${t("close")}</button>`}
+function allot(id){const v=document.getElementById("car").value,a=document.getElementById("lf").value,b=document.getElementById("lt").value;if(v==="")return toast(t("pick"));if(!a||!b||b<a)return toast(t("errDate"));const r=R.find(x=>x.id===id);r.car=+v;r.lf=a;r.lt=b;r.st="allotted";save();render()}
+/* ---------- Smile Passport ---------- */
+function pblank(){return{plan:"bc",join:"n",opt:"new0",cls:0,other:0,pa:"佐賀",pc:"",pk:"",pn:"",plate:"",car:"",reg:"",expiry:"",store:0,name:"",kana:"",zip:"",addr:"",tel:"",coat:0,terms:[0,0,0,0,0],ctype:"",fine:0,ep:[0,0,0],chassis:"",ant:[0,0],sig:"",used:0}}
+function psum(p){return `<dl class="kv"><dt>${L2("申込日","Application date")}</dt><dd>${rw(today())}</dd><dt>${L2("プラン","Plan")}</dt><dd>${L2(PLAN[p.plan][0],PLAN[p.plan][1])}</dd><dt>${L2("加入コース","Course")}</dt><dd>${L2(OPT[p.opt].a,OPT[p.opt].b)} / ${L2(CLS[p.cls][0],CLS[p.cls][1])}${p.other?L2("（他社購入車）"," (other dealer)"):""}</dd><dt>${L2("申込書コード","Form code")}</dt><dd><b>${code(p)}</b></dd><dt>${L2("料金（税込）","Price (tax incl.)")}</dt><dd><b>${yen(price(p))}</b></dd><dt>${L2("車種","Car model")}</dt><dd>${esc(p.car)}</dd><dt>${L2("登録番号","Registration no.")}</dt><dd>${esc(plt(p))}</dd><dt>${L2("登録日・更新日 〜 車検満了日","Registered/renewed 〜 shaken expiry")}</dt><dd>${rw(p.reg)} 〜 ${rw(p.expiry)}</dd>${hasShk(p)?`<dt>${t("chassis")}</dt><dd>${esc(p.chassis)||"—"}</dd>`:""}<dt>${L2("お申込み氏名","Applicant")}</dt><dd>${esc(p.name)} (${esc(p.kana)})</dd><dt>${L2("ご住所","Address")}</dt><dd>〒${esc(p.zip)} ${esc(p.addr)} / ${esc(p.tel)}</dd><dt>${L2("担当店舗","Store")}</dt><dd>${sn(p.store)}</dd></dl><div class="mut">${L2("※追加整備費用および車両引取・納車料は別途申し受けます。","※Additional maintenance and vehicle pick-up/delivery fees are charged separately.")}</div>`}
+function pwiz(){
+ const p=S.p;fixP();const st=["プラン・料金","お車・お客様","確認・同意","署名・送信"],se=["Plan & price","Vehicle & you","Review & agree","Sign & send"];
+ let h=`<div class="steps">${st.map((n,i)=>`<div class="st ${i===S.ps?"on":i<S.ps?"done":""}"><i>${i<S.ps?"✓":i+1}</i><span>${L2(n,se[i])}</span></div>`).join("")}</div><div class="card">`;
+ if(S.ps===0){const pr=price(p),rg=p.plan==="bc"&&p.cls<5?REG[p.opt]?.[p.cls]:0,rn=RNG[p.opt];
+  h+=`<b>${L2("プラン","Plan")}</b>`+Object.keys(PLAN).map(k=>rad("pl",p.plan===k,`S.p.plan='${k}';render()`,`<b>${L2(PLAN[k][0],PLAN[k][1])}</b>`)).join("")+`<b>${L2("ご入会のタイミング","When you join")}</b>`+Object.keys(JOIN).map(k=>rad("jn",p.join===k,`S.p.join='${k}';render()`,`<b>${L2(JOIN[k][0],JOIN[k][1])}</b> <span class="mut">${L2(JOIN[k][2],JOIN[k][3])}</span>`)).join("")
+  +`<div class="grid" style="margin-top:12px"><label class="f">${L2("コース","Course")}<select onchange="S.p.opt=this.value;render()">${opts(p).map(k=>`<option value="${k}" ${p.opt===k?"selected":""}>${L2(OPT[k].a,OPT[k].b)}</option>`).join("")}</select></label><label class="f">${L2("車のクラス","Vehicle class")}<select onchange="S.p.cls=+this.value;render()">${CLS.map((c,i)=>i<5||(p.plan==="pc"&&CG[p.opt])?`<option value="${i}" ${p.cls===i?"selected":""}>${L2(c[0],c[1])}</option>`:"").join("")}</select></label></div>`
+  +(p.join==="n"?chk("S.p.other=this.checked?1:0",p.other,L2("他社で購入した新車（新車コース（他社））","New car bought from another dealer (New-car course – other dealers)")):"")
+  +`<div class="hint" style="margin-top:12px"><span class="pr">${yen(pr)}</span> ${L2("（税込・全額前払い）","(tax incl., prepaid in full)")}<br>${L2("申込書コード","Form code")}: <b>${code(p)}</b>${rg?`<br>${L2("通常料金","Regular price")} ${yen(rg)} ／ <b>${L2("こんなにお得","You save")} ${yen(rg-pr)}</b> <span class="mut">${L2("（通常料金はクラス毎の代表的な車種の料金です）","(regular price is for a representative model of each class)")}</span>`:""}<br>${L2(`対象：${rn[0]}〜${rn[1]}ヶ月目`,`Covers: month ${rn[0]}–${rn[1]}`)}${rn[1]>=36?L2("・車検基本料金込み","; shaken base fee included"):""}</div><div class="mut">${L2("※追加整備費用および車両引取・納車料は別途申し受けます。クラスごとの車種は「プラン・特典」をご覧ください。","※Additional maintenance and pick-up/delivery fees are extra. See Plans & benefits for models in each class.")}</div>`}
+ if(S.ps===1){h+=`<h2 style="margin-top:0">${L2("お車","Your car")}</h2><div class="grid">${pin("pa",L2("登録番号：地域名","Plate: region"),"text")}${pin("pc",L2("分類番号（3桁）","Class no. (3 digits)"),"text","300")}${pin("pk",L2("ひらがな（1文字）","Hiragana (1 char)"),"text","あ")}${pin("pn",L2("一連番号（4桁）","Serial no. (4 digits)"),"text","1234")}${pin("car",L2("車種","Car model"),"text")}${pin("reg",L2("登録日・更新日","Registration / renewal date"),"date")}${pin("expiry",L2("車検満了日","Shaken expiry date"),"date")}<label class="f">${L2("担当店舗","Preferred store")}<select onchange="S.p.store=+this.value">${STORES.map((s,i)=>`<option value="${i}" ${p.store===i?"selected":""}>${sn(i)}</option>`).join("")}</select></label></div><h2>${L2("お申込み者（お客様ご自身でご記入ください）","Applicant (please fill in yourself)")}</h2><div class="grid">${pin("name",L2("お申込み氏名","Applicant name"),"text")}${pin("kana",t("kana"),"text")}${pin("zip",t("zip"),"text","840-0801")}${pin("tel",t("tel"),"tel")}</div><div style="margin-top:14px">${pin("addr",t("addr"),"text")}</div>`
+  +(p.plan!=="pc"?chk("S.p.coat=this.checked?1:0",p.coat,L2("次のいずれかのコーティングを施工済みです：CPCプレミアムコーティングエクスGN／ダブルGN、グラスコーティングガードコスメSP、CPCペイントシーラント","My car has one of these coatings: CPC Premium Coating EX GN / Double GN, Glass Coating Guard Cosme SP, CPC Paint Sealant")):"")}
+ if(S.ps===2){h+=`<div class="mut">${L2("ご来店ください。お客様ご自身でお車の持ち込み・引取りをいただくことで特別料金としています。適用項目以外は別途料金となります。","Please visit in person: special rates apply when you bring and collect your car yourself. Items outside the plan are charged separately.")}</div>`+TT.map((_,i)=>{const x=tt(p,i);return `<div style="margin:8px 0"><b>${L2(x[0],x[1])}</b><div class="mut">${L2(x[2],x[3])}</div>${chk(`S.p.terms[${i}]=this.checked?1:0`,p.terms[i],L2("同意します","I agree"))}</div>`}).join("")
+  +`<div class="hint"><b>${L2("解約金の目安","Cancellation estimate")}</b><br>${L2("実施済みの整備費用（円）","Cost of services already used (¥)")}: <input type="text" inputmode="numeric" style="width:130px" value="${p.used}" oninput="S.p.used=+this.value||0;document.getElementById('rf').textContent=yen(rf())"> → ${L2("解約金","Refund")} <b id="rf">${yen(rf())}</b></div>`+(hasShk(p)?shk(p,"S.p",plt(p)):"")+antB(p,"S.p")}
+ if(S.ps===3){h+=`<h2 style="margin-top:0">${t("review")}</h2>${psum(p)}<h2>${t("sigT")}</h2><canvas id="sig" aria-label="${t("sigT")}"></canvas><div class="row" style="margin-top:8px"><span class="mut">${t("sigNote")}${rw(today())}<br>${L2("この署名は、スマイルパスポート申込書・確認書"+(hasShk(p)?"・放置違反金滞納情報照会同意書／継続検査確認事項及び承諾書":"")+"に適用されます。","This signature applies to the Smile Passport application, the confirmation"+(hasShk(p)?", and the parking-fine consent / continued-inspection confirmation":"")+".")}</span><button class="btn sec" onclick="clearSig()">${t("clear")}</button></div>`}
+ return h+`<div class="row"><button class="btn sec" ${S.ps===0?"style='visibility:hidden'":""} onclick="S.ps--;render();scrollTo(0,0)">${t("back")}</button>`+(S.ps<3?`<button class="btn pri" onclick="pnext()">${t("next")}</button>`:`<button class="btn pri" onclick="psubmit()">${t("submit")}</button>`)+`</div></div>`;
+}
+function pnext(){const p=S.p;let e="";
+ if(S.ps===1){if(!p.pa||!p.pc||!p.pk||!p.pn||!p.car||!p.reg||!p.expiry||!p.name||!p.kana||!p.zip||!p.addr||!p.tel)e=t("errReq");
+  else if(!/^\d{3}$/.test(p.pc)||!/^[ぁ-んァ-ヶA-Za-z]$/.test(p.pk)||!/^[0-9・.]{1,4}$/.test(p.pn))e=L2("登録番号の形式をご確認ください（分類番号3桁・ひらがな1文字・一連番号4桁）。","Please check the plate: 3-digit class no., 1 hiragana, up to 4-digit serial.");
+  else if(!/^\d{3}-?\d{4}$/.test(p.zip))e=L2("郵便番号は 840-0801 の形式で入力してください。","Postal code format: 840-0801.");
+  else if(p.expiry<p.reg)e=t("errDate");
+  else if(p.plan!=="pc"&&!p.coat)e=L2("ボデーケアは対象コーティングの施工が必要です。","Body Care requires one of the listed coatings.")}
+ if(S.ps===2){if(p.terms.includes(0)||p.ant.includes(0))e=t("errAgree");else if(hasShk(p)&&(!p.ctype||!p.fine||!p.chassis.trim()))e=t("errCt")}
+ if(e)return toast(e);S.ps++;render();scrollTo(0,0)}
+function psubmit(){if(!S.p.sig)return toast(t("errSig"));S.p.plate=pltC(S.p);PQ.unshift({id:"P-"+(2001+PQ.length),st:"pending",p:S.p,start:"",end:"",done:[],note:"",kbn:"",hq:"",insp:{},appDate:today()});savePQ();S.p=pblank();S.ps=0;S.pt="my";render();scrollTo(0,0);toast(L2("お申込みを受け付けました。店頭でお支払い・ご確認をお願いします。","Application received. Please pay and confirm in store."))}
+function pcard(q,stf){const p=q.p;return `<div class="card ${stf?"req":""}" ${stf?`tabindex="0" onclick="S.psel='${q.id}';render();scrollTo(0,0)"`:""}><div class="top"><b>${L2(PLAN[p.plan][0],PLAN[p.plan][1])} <span class="mut">${q.id}</span></b>${pbadge(q.st)}</div><div class="mut">${stf?esc(p.name)+" ・ ":""}${L2(OPT[p.opt].a,OPT[p.opt].b)} ・ ${L2(CLS[p.cls][0],CLS[p.cls][1])} ・ ${yen(price(p))} ・ ${L2("コード","Code")} ${code(p)}</div>${q.st==="active"&&!stf?`<div class="mut">${L2("有効期間","Valid")}: ${rw(q.start)} 〜 ${rw(q.end)}</div>${vlist(q,visits(p))}`:""}${q.st==="pending"&&!stf?`<div class="mut">${L2("店頭でのお支払い確認後に有効になります。","Becomes active after payment is confirmed in store.")}</div>`:""}${stf&&q.hq?`<div class="mut">✓ ${L2("営業本部へ送付済み","Sent to sales HQ")} ${rw(q.hq)}</div>`:""}${q.note?`<p><b>${t("note")}:</b> ${esc(q.note)}</p>`:""}${!stf?`<details><summary class="mut" style="cursor:pointer">${L2("お客様控え・住所変更","Customer copy / change address")}</summary>${psum(p)}<div class="grid"><label class="f">${t("zip")}<input type="text" id="az${q.id}" value="${esc(p.zip)}"></label><label class="f">${t("addr")}<input type="text" id="ad${q.id}" value="${esc(p.addr)}"></label></div><div class="row"><span class="mut">${L2("ハガキでのご案内のため、転居の際は必ずご連絡ください。","Please tell us when you move so reminder postcards reach you.")}</span><button class="btn sec" onclick="paddr('${q.id}')">${L2("住所を変更","Update address")}</button></div></details>`:""}</div>`}
+function paddr(id){const q=PQ.find(x=>x.id===id),z=document.getElementById("az"+id).value,a=document.getElementById("ad"+id).value;if(!/^\d{3}-?\d{4}$/.test(z)||!a)return toast(t("errReq"));q.p.zip=z;q.p.addr=a;savePQ();toast(L2("住所を更新しました。","Address updated."));render()}
+function pdetail(q){const p=q.p,docs=[["スマイルパスポート申込書（店舗→営業本部）2026.10改定","Smile Passport application (store → sales HQ), rev. 2026.10",p.terms.every(x=>x)],["確認書（暴力団排除）","Anti-organized-crime confirmation",p.ant.every(x=>x)]].concat(hasShk(p)?[["放置違反金滞納情報照会における同意書／継続検査確認事項及び承諾書","Parking-fine consent / continued-inspection confirmation",!!p.fine&&!!p.chassis],["放置違反金滞納情報照会書（整備事業者用）","Parking-fine inquiry sheet (dealer)",!!(q.insp&&q.insp.rs)]]:[]);let a="";
+ if(q.st==="pending"){const s0=p.reg||today(),e0=p.opt==="new54"&&p.reg?addM(p.reg,54):p.expiry;a=`<div class="grid"><label class="f">${L2("有効期間：開始（登録日・更新日）","Valid from (registration/renewal date)")}<input type="date" id="pst" value="${s0}"></label><label class="f">${L2("有効期間：終了（車検満了日）","Valid until (shaken expiry)")}<input type="date" id="pen" value="${e0}"></label><label class="f">${L2("契約区分","Contract category")}<input type="text" id="pkb" value="${esc(q.kbn||"")}"></label><span></span></div><label class="chk"><input type="checkbox" id="ppd"><span>${L2("全額のお支払いを確認しました","Full payment received")} (${yen(price(p))})</span></label><label class="f">${t("noteIn")}<textarea id="pnt" rows="2"></textarea></label><div class="row"><button class="btn bad" onclick="pset('${q.id}','rejected')">${t("reject")}</button><button class="btn pri" onclick="pset('${q.id}','active')">${L2("承認して有効化","Approve & activate")}</button></div>`}
+ if(q.st==="active")a=`<div class="mut">${rw(q.start)} 〜 ${rw(q.end)} ・ ${L2("契約区分","Category")}: ${esc(q.kbn||"—")}</div>`+vlist(q,visits(p))+`<div class="row"><span class="mut">${q.hq?"✓ "+L2("営業本部へ送付済み","Sent to sales HQ")+" "+rw(q.hq):""}</span><div><button class="btn sec" onclick="phq('${q.id}')">${L2("営業本部へ送付","Send to sales HQ")}</button> <button class="btn pri" onclick="pvisit('${q.id}')">${L2("入庫完了を記録","Record completed visit")}</button></div></div>`;
+ return `<div class="top"><h1>${q.id}</h1>${pbadge(q.st)}</div>${docList(docs)}<div class="card">${psum(p)}<dl class="kv"><dt>${L2("同意","Consents")}</dt><dd>${p.terms.every(x=>x)&&p.ant.every(x=>x)?`<span class="badge s-allotted">✓ ${t("agreed")}</span>`:`<span class="badge s-rejected">${t("notag")}</span>`}${hasShk(p)?` ・ ${t("ct")}: ${p.ctype?t(p.ctype):"—"} ・ e-filing: ${p.ep.map(x=>x?"✓":"–").join(" ")}`:""}</dd><dt>${t("sig")}</dt><dd>${p.sig?`<img src="${p.sig}" alt="${t("sec")}" style="max-width:260px;background:#fff;border:1px solid var(--line);border-radius:6px"> <div class="mut">${rw(q.appDate||today())}</div>`:"—"}</dd></dl></div><div class="card">${a||"—"}</div>${hasShk(p)?`<div class="card">${inspUI(q,"p")}</div>`:""}<button class="btn sec" onclick="S.psel=null;render()">← ${t("close")}</button>`}
+function pset(id,st){const q=PQ.find(x=>x.id===id);q.note=document.getElementById("pnt").value;
+ if(st==="active"){const a=document.getElementById("pst").value,b=document.getElementById("pen").value;if(!document.getElementById("ppd").checked||!a||!b||b<a)return toast(L2("支払い確認と有効期間の入力が必要です。","Confirm payment and enter valid dates."));q.start=a;q.end=b;q.kbn=document.getElementById("pkb").value}
+ q.st=st;savePQ();render()}
+function phq(id){PQ.find(x=>x.id===id).hq=today();savePQ();render()}
+/* normalise any data saved by the earlier version */
+R.forEach(r=>{r.f=Object.assign(blank(),r.f);r.f.ep=[...r.f.ep,0,0,0].slice(0,3);r.insp=r.insp||{};if(r.id==="R-1001"&&!r.f.chassis)Object.assign(r.f,{accept:1,chassis:"MXUA80-0012345",ep:[1,1,1]})});
+PQ.forEach(q=>{q.p=Object.assign(pblank(),q.p);q.p.ep=[...q.p.ep,0,0,0].slice(0,3);q.insp=q.insp||{};q.kbn=q.kbn||"";q.hq=q.hq||"";if(q.id==="P-2001"&&!q.p.reg)Object.assign(q.p,{reg:"2026-10-31",pa:"佐賀",pc:"300",pk:"さ",pn:"1234",ant:[1,1],ctype:"reg",fine:1,ep:[1,1,1],chassis:"MXUA80-0054321"})});
+S.f=blank();S.p=pblank();
+render();
+</script>
+</body>
+</html>
